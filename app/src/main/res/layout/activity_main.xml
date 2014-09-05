@@ -8,9 +8,127 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/linearLayout">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1"
+            android:id="@+id/row1">
+
+            <Button
+                android:layout_width="213dp"
+                android:layout_height="fill_parent"
+                android:text="Valora tu Negocio"
+                android:id="@+id/row1_button1" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="Cursos Virtuales"
+                android:id="@+id/row1_button2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1"
+            android:id="@+id/row2">
+
+            <Button
+                android:layout_width="153dp"
+                android:layout_height="fill_parent"
+                android:text="E-Granja"
+                android:id="@+id/row2_button1" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="Suganet"
+                android:id="@+id/row2_button2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/row3">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Convocatoria"
+                android:id="@+id/row3_button1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/row4">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Indentifica\nSistema nacional de identificación\n e información del ganado bovino"
+                android:id="@+id/row4_button1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/row5">
+            <Button
+                android:layout_width="213dp"
+                android:layout_height="fill_parent"
+                android:text="Certificado fitosanitario para exportación - CFE"
+                android:id="@+id/row5_button1" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="Certificado Zoosanitario Exportación - CEZA"
+                android:id="@+id/row5_button2" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/row6">
+
+            <Button
+                android:layout_width="153dp"
+                android:layout_height="fill_parent"
+                android:text="Certificado Zoosanitario Exportación - CEZA"
+                android:id="@+id/row6_button1" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="Certificado fitosanitario para exportación - CFE"
+                android:id="@+id/row6_button2" />
+
+            </LinearLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>
