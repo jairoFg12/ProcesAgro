@@ -28,19 +28,16 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        callView1= (Button) findViewById(R.id.row1_button1);
-        callView2= (Button) findViewById(R.id.row1_button2);
-        callView3= (Button) findViewById(R.id.row2_button1);
-        callView4= (Button) findViewById(R.id.row2_button2);
-
-        callView5= (Button) findViewById(R.id.row3_button1);
-        callView6= (Button) findViewById(R.id.row2_button2);
-
-        callView7= (Button) findViewById(R.id.row2_button2);
-        callView8= (Button) findViewById(R.id.row2_button2);
-
-        callView9= (Button) findViewById(R.id.row2_button2);
-        callView10= (Button) findViewById(R.id.row2_button2);
+        callView1= (Button) findViewById(R.id.row1_button1);//row1
+        callView2= (Button) findViewById(R.id.row1_button2);//row1
+        callView3= (Button) findViewById(R.id.row2_button1);//row2
+        callView4= (Button) findViewById(R.id.row2_button2);//row2
+        callView5= (Button) findViewById(R.id.row3_button1);//row3
+        callView6= (Button) findViewById(R.id.row4_button1);//row4
+        callView7= (Button) findViewById(R.id.row5_button1);//row5
+        callView8= (Button) findViewById(R.id.row5_button2);//row5
+        callView9= (Button) findViewById(R.id.row6_button1);//row6
+        callView10= (Button) findViewById(R.id.row6_button2);//row6
 
         callView1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -82,25 +79,54 @@ public class MainActivity extends ActionBarActivity{
             }
         });
 
+        callView5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("events", "clic boton 5");
+                Intent intentToCall = new Intent(MainActivity.this, CallActivity.class);
+                startActivity(intentToCall);
+            }
+        });
+
+        callView6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("events", "clic boton 6");
+                Intent intentToTransact = new Intent(MainActivity.this, TransactActivity.class);
+                startActivity(intentToTransact);
+            }
+        });
+
+        callView7.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("events", "clic boton 7");
+                Intent intentToDeals1 = new Intent(MainActivity.this, DealsActivity.class);
+                startActivity(intentToDeals1);
+            }
+        });
+
+        callView8.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("events", "clic boton 8");
+                Intent intentToDeals2 = new Intent(MainActivity.this, DealsActivity.class);
+                startActivity(intentToDeals2);
+            }
+        });
+
+        callView9.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("events", "clic boton 9");
+                Intent intentToDeals3 = new Intent(MainActivity.this, DealsActivity.class);
+                startActivity(intentToDeals3);
+            }
+        });
+
+        callView10.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("events", "clic boton 10");
+                Intent intentToDeals4 = new Intent(MainActivity.this, DealsActivity.class);
+                startActivity(intentToDeals4);
+            }
+        });
+
 
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }

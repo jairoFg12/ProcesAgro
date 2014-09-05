@@ -1,5 +1,7 @@
 package com.wyble.procesagro;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.webkit.WebView;
@@ -10,10 +12,12 @@ public class WebViewActivity extends ActionBarActivity {
     WebView webView1_aux;
     String url_setter;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle dataFromHomeActivity= getIntent().getExtras();
         url_setter= dataFromHomeActivity.getString("URL_PARAMETER");
