@@ -1,5 +1,7 @@
 package com.wyble.procesagro;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -23,10 +25,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Log.d("-->", "aqui es el intent");
+        Log.d("-->", "aquí es el intent");
         //to do things!
+        Uri uri = Uri.parse("http://www.google.com");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
-
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
