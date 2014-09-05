@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 
 
@@ -20,8 +19,6 @@ public class MainActivity extends ActionBarActivity{
     Button callView8;
     Button callView9;
     Button callView10;
-
-    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +123,5 @@ public class MainActivity extends ActionBarActivity{
                 startActivity(intentToDeals4);
             }
         });
-
-
     }
 }
