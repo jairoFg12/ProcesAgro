@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/editText"
+                    android:id="@+id/bovino1"
                     android:layout_gravity="center_horizontal"
                     android:text="0"
                     android:gravity="center_vertical|center_horizontal" />
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/bovino2"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="0" />
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/editText3"
+                    android:id="@+id/bovino3"
                     android:layout_gravity="center_horizontal"
                     android:text="0"
                     android:gravity="center_vertical|center_horizontal" />
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/editText4"
+                    android:id="@+id/bovino4"
                     android:layout_gravity="center_horizontal"
                     android:text="0"
                     android:gravity="center_vertical|center_horizontal" />

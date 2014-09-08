@@ -119,8 +119,8 @@ public class MainActivity extends ActionBarActivity{
         callView6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("events", "clic boton 6");
-                Intent intentToTransact = new Intent(MainActivity.this, TransactActivity.class);
-                startActivity(intentToTransact);
+                Intent intentToForm = new Intent(MainActivity.this, Call_Form1Activity.class);
+                startActivity(intentToForm);
             }
         });
 

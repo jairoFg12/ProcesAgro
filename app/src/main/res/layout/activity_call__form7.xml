@@ -30,7 +30,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/justificacion"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.11"
             android:hint="justificación..." />
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acepto"
-            android:id="@+id/switch1"
+            android:id="@+id/terminos"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.11"
             android:checked="false" />
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:text="Siguiente"
             android:drawableTop="@android:drawable/ic_media_next"
-            android:id="@+id/form6_next"
+            android:id="@+id/form7_send"
             android:textColor="#ffffff"
             android:textSize="14dp"
             android:layout_alignParentLeft="true"

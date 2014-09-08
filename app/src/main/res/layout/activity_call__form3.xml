@@ -30,7 +30,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/nombre_solic"
             android:layout_gravity="center_horizontal"
             android:hint="Nombre solicitante"
             android:layout_marginTop="@dimen/activity_vertical_margin" />
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/cedula_solic"
             android:layout_gravity="center_horizontal"
             android:hint="Cédula solicitante" />
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/telefono_solic"
             android:layout_gravity="center_horizontal"
             android:hint="Télefono fijo" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
-            android:id="@+id/editText4"
+            android:id="@+id/celular_solic"
             android:layout_gravity="center_horizontal"
             android:hint="Télefono celular" />
 

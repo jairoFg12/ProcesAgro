@@ -30,7 +30,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/municipio"
             android:layout_gravity="center_horizontal"
             android:hint="Municipio o Vereda"
             android:layout_marginTop="@dimen/activity_vertical_margin" />
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/departamento"
             android:layout_gravity="center_horizontal"
             android:hint="Departamento" />
 
