@@ -1,7 +1,7 @@
 package com.wyble.procesagro;
 
 import android.annotation.TargetApi;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.wyble.procesagro.models.Convocatoria;
 
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 public class CallActivity extends ActionBarActivity {
 
     private ListView convListView;
-    String idregistro;
-    final Context context = this;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -30,7 +27,7 @@ public class CallActivity extends ActionBarActivity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Serializable dataFromMainActivity = getIntent().getSerializableExtra("CONVOCATORIAS");
-        ArrayList<Convocatoria> convocatorias = (ArrayList<Convocatoria>) dataFromMainActivity;
+        final ArrayList<Convocatoria> convocatorias = (ArrayList<Convocatoria>) dataFromMainActivity;
 
         convListView = (ListView) findViewById(R.id.convListView);
         ArrayAdapter<Convocatoria> arrayAdapter = new ArrayAdapter<Convocatoria>(this, R.layout.convocatoria_text_view, convocatorias);
@@ -38,9 +35,10 @@ public class CallActivity extends ActionBarActivity {
 
         convListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(getApplicationContext(),
-                        "" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CallActivity.this, ConvDetalle.class);
+                Convocatoria item = convocatorias.get(position);
+                intent.putExtra("CONVOCATORIA_ITEM", item);
+                startActivity(intent);
             }
         });
     }

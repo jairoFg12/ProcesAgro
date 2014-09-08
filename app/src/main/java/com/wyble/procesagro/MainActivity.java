@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity{
         callView5= (Button) findViewById(R.id.row3_button1);//row3
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(convocatorias.size());
-        callView5.setText(convocatorias.get(index).getTitulo());
+        callView5.setText(convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
 
         callView6= (Button) findViewById(R.id.row4_button1);//row4
         callView7= (Button) findViewById(R.id.row5_button1);//row5

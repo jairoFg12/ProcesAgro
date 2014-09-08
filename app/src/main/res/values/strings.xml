@@ -7,5 +7,7 @@
     <string name="title_activity_transact">Tramites</string>
     <string name="title_activity_call">Convocatorias</string>
     <string name="title_activity_deals">Ofertas</string>
+    <string name="title_activity_conv_detalle">conv_detalle</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
