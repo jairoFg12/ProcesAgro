@@ -88,10 +88,10 @@
                 android:id="@+id/row3_button1"
                 android:background="@drawable/convocatorias"
                 android:layout_margin="1dp"
-                android:text="Titulo Convocatoria"
-                android:textSize="30dp"
-                android:singleLine="true"
-                android:paddingBottom="20dp" />
+                android:text="Titulo Convocatoria\nDescripción Corta"
+                android:textSize="22dp"
+                android:paddingBottom="30dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

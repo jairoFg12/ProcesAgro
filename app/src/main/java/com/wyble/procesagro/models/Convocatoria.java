@@ -29,7 +29,7 @@ public class Convocatoria implements Serializable {
     }
 
     public String toString() {
-        return this.titulo;
+        return this.titulo + "\n" + this.descripcion_corta;
     }
 
     public int getId() { return this.id; }
