@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-
 public class CallActivity extends ActionBarActivity {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -14,5 +13,7 @@ public class CallActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
+
 }

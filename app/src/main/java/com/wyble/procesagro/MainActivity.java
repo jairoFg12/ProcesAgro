@@ -2,13 +2,26 @@ package com.wyble.procesagro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.wyble.procesagro.helpers.DB;
+import com.wyble.procesagro.helpers.Webservice;
+import com.wyble.procesagro.models.Convocatoria;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class MainActivity extends ActionBarActivity{
+
+    public static final String CONVOCATORIAS_URL = "http://tucompualdia.com/aplicaciones/procesAgroWebService/convocatorias.php";
+
     Button callView1;
     Button callView2;
     Button callView3;
@@ -123,5 +136,33 @@ public class MainActivity extends ActionBarActivity{
                 startActivity(intentToDeals4);
             }
         });
+
+        // Just for testing, allow network access in the main thread
+        // NEVER use this is productive code
+        StrictMode.ThreadPolicy policy = new StrictMode.
+                ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Webservice ws = new Webservice(CONVOCATORIAS_URL);
+        JSONArray jsonArray = ws.parseJsonText(ws.getJsonText());
+        ArrayList<Convocatoria> convocatorias = this.getConvocatorias(jsonArray);
+    }
+
+    private ArrayList<Convocatoria> getConvocatorias(JSONArray jsonArray) {
+        ArrayList convocatorias = new ArrayList();
+        DB db = new DB(this, "convocatorias", jsonArray);
+
+        ArrayList<HashMap> data = db.getAllData();
+        for (HashMap d : data) {
+            convocatorias.add(new Convocatoria(
+                    Integer.parseInt(d.get("autoId").toString()),
+                    d.get("tituloConvocatoria").toString(),
+                    d.get("descripcion").toString(),
+                    d.get("descripcionLarga").toString(),
+                    d.get("urlConvocatoria").toString(),
+                    d.get("usuario_id").toString()
+            ));
+        }
+        return convocatorias;
     }
 }
