@@ -87,7 +87,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/row3_button1"
                 android:background="@drawable/convocatorias"
-                android:layout_margin="1dp" />
+                android:layout_margin="1dp"
+                android:text="Titulo Convocatoria"
+                android:textSize="30dp"
+                android:singleLine="true"
+                android:paddingBottom="20dp" />
+
         </LinearLayout>
 
         <LinearLayout

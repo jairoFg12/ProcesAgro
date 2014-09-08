@@ -16,11 +16,14 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity{
 
     public static final String CONVOCATORIAS_URL = "http://tucompualdia.com/aplicaciones/procesAgroWebService/convocatorias.php";
+
+    private ArrayList<Convocatoria> convocatorias;
 
     Button callView1;
     Button callView2;
@@ -38,11 +41,26 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Just for testing, allow network access in the main thread
+        // NEVER use this is productive code
+        StrictMode.ThreadPolicy policy = new StrictMode.
+                ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Webservice ws = new Webservice(CONVOCATORIAS_URL);
+        JSONArray jsonArray = ws.parseJsonText(ws.getJsonText());
+        convocatorias = this.getConvocatorias(jsonArray);
+
         callView1= (Button) findViewById(R.id.row1_button1);//row1
         callView2= (Button) findViewById(R.id.row1_button2);//row1
         callView3= (Button) findViewById(R.id.row2_button1);//row2
         callView4= (Button) findViewById(R.id.row2_button2);//row2
+
         callView5= (Button) findViewById(R.id.row3_button1);//row3
+        Random randomGenerator = new Random();
+        int index = randomGenerator.nextInt(convocatorias.size());
+        callView5.setText(convocatorias.get(index).getTitulo());
+
         callView6= (Button) findViewById(R.id.row4_button1);//row4
         callView7= (Button) findViewById(R.id.row5_button1);//row5
         callView8= (Button) findViewById(R.id.row5_button2);//row5
@@ -93,6 +111,7 @@ public class MainActivity extends ActionBarActivity{
             public void onClick(View v) {
                 Log.d("events", "clic boton 5");
                 Intent intentToCall = new Intent(MainActivity.this, CallActivity.class);
+                intentToCall.putExtra("CONVOCATORIAS", convocatorias);
                 startActivity(intentToCall);
             }
         });
@@ -137,15 +156,6 @@ public class MainActivity extends ActionBarActivity{
             }
         });
 
-        // Just for testing, allow network access in the main thread
-        // NEVER use this is productive code
-        StrictMode.ThreadPolicy policy = new StrictMode.
-                ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        Webservice ws = new Webservice(CONVOCATORIAS_URL);
-        JSONArray jsonArray = ws.parseJsonText(ws.getJsonText());
-        ArrayList<Convocatoria> convocatorias = this.getConvocatorias(jsonArray);
     }
 
     private ArrayList<Convocatoria> getConvocatorias(JSONArray jsonArray) {
@@ -163,6 +173,8 @@ public class MainActivity extends ActionBarActivity{
                     d.get("usuario_id").toString()
             ));
         }
+
+        db.close();
         return convocatorias;
     }
 }

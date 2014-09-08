@@ -1,9 +1,11 @@
 package com.wyble.procesagro.models;
 
+import java.io.Serializable;
+
 /**
  * Created by david on 9/7/14.
  */
-public class Convocatoria {
+public class Convocatoria implements Serializable {
 
     private int id;
 
@@ -24,6 +26,10 @@ public class Convocatoria {
         this.descripcion_larga = descripcion_larga;
         this.url = url;
         this.usuario = usuario;
+    }
+
+    public String toString() {
+        return this.titulo;
     }
 
     public int getId() { return this.id; }
