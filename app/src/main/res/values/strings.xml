@@ -8,6 +8,12 @@
     <string name="title_activity_call">Convocatorias</string>
     <string name="title_activity_deals">Ofertas</string>
     <string name="title_activity_conv_detalle">conv_detalle</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_call__form1">Call_Form1Activity</string>
+    <string name="title_activity_call__form2">Call_Form2Activity</string>
+    <string name="title_activity_call__form3">Call_Form3Activity</string>
+    <string name="title_activity_call__form4">Call_Form4Activity</string>
+    <string name="title_activity_call__form5">Call_Form5Activity</string>
+    <string name="title_activity_call__form6">Call_Form6Activity</string>
+    <string name="title_activity_call__form7">Call_Form7Activity</string>
 
 </resources>

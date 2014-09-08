@@ -48,6 +48,34 @@
             android:name=".ConvDetalle"
             android:label="@string/title_activity_conv_detalle" >
         </activity>
+        <activity
+            android:name=".Call_Form1Activity"
+            android:label="@string/title_activity_call__form1" >
+        </activity>
+        <activity
+            android:name=".Call_Form2Activity"
+            android:label="@string/title_activity_call__form2" >
+        </activity>
+        <activity
+            android:name=".Call_Form3Activity"
+            android:label="@string/title_activity_call__form3" >
+        </activity>
+        <activity
+            android:name=".Call_Form4Activity"
+            android:label="@string/title_activity_call__form4" >
+        </activity>
+        <activity
+            android:name=".Call_Form5Activity"
+            android:label="@string/title_activity_call__form5" >
+        </activity>
+        <activity
+            android:name=".Call_Form6Activity"
+            android:label="@string/title_activity_call__form6" >
+        </activity>
+        <activity
+            android:name=".Call_Form7Activity"
+            android:label="@string/title_activity_call__form7" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
