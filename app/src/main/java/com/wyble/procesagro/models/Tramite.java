@@ -190,11 +190,11 @@ public class Tramite implements Serializable {
         return perdidaDIN;
     }
 
-    public Boolean getTerminos() {
-        return terminos;
-    }
-
     public String getJustificacion() {
         return justificacion;
+    }
+
+    public Boolean getTerminos() {
+        return terminos;
     }
 }
