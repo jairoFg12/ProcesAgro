@@ -5,23 +5,17 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Parcelable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wyble.procesagro.models.Convocatoria;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,42 +56,65 @@ public class ConvDetalle extends ActionBarActivity {
 
         facebookBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                share("facebook", convocatoria.getUrl());
+                Log.d("->","Facebook");
+
+                String urlToShare = convocatoria.getUrl();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                // intent.putExtra(Intent.EXTRA_SUBJECT, "Foo bar"); // NB: has no effect!
+                intent.putExtra(Intent.EXTRA_TEXT, urlToShare);
+
+                // See if official Facebook app is found
+                boolean facebookAppFound = false;
+                List<ResolveInfo> matches = getPackageManager().queryIntentActivities(intent, 0);
+                for (ResolveInfo info : matches) {
+                    if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook.katana")) {
+                        intent.setPackage(info.activityInfo.packageName);
+                        facebookAppFound = true;
+                        break;
+                    }
+                }
+
+                // As fallback, launch sharer.php in a browser
+                if (!facebookAppFound) {
+                    String sharerUrl = "https://www.facebook.com/sharer/sharer.php?u=" + urlToShare;
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
+                }
+                startActivity(intent);
             }
         });
 
         twitterBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                share("twitter", convocatoria.getUrl());
+                Log.d("->","Twitter");
+                String urlToShare = convocatoria.getUrl();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                // intent.putExtra(Intent.EXTRA_SUBJECT, "Foo bar"); // NB: has no effect!
+                intent.putExtra(Intent.EXTRA_TEXT, urlToShare);
+
+                // See if official Facebook app is found
+                boolean twitterAppFound = false;
+                List<ResolveInfo> matches = getPackageManager().queryIntentActivities(intent, 0);
+                for (ResolveInfo info : matches) {
+                    if (info.activityInfo.packageName.toLowerCase().startsWith("com.twitter")) {
+                        intent.setPackage(info.activityInfo.packageName);
+                        twitterAppFound = true;
+                        break;
+                    }
+                }
+
+                // As fallback, launch sharer.php in a browser
+                if (!twitterAppFound) {
+                    Toast.makeText(ConvDetalle.this, "Twitter app not Insatlled in your mobile", Toast.LENGTH_SHORT).show();
+                    //String sharerUrl = "https://www.facebook.com/sharer/sharer.php?u=" + urlToShare;
+                    //intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
+                }
+                startActivity(intent);
             }
         });
 
     }
 
-    private void share(String nameApp, String message) {
-        try
-        {
-            List<Intent> targetedShareIntents = new ArrayList<Intent>();
-            Intent share = new Intent(android.content.Intent.ACTION_SEND);
-            List<ResolveInfo> resInfo = getPackageManager().queryIntentActivities(share, 0);
-            if (!resInfo.isEmpty()){
-                for (ResolveInfo info : resInfo) {
-                    Intent targetedShare = new Intent(android.content.Intent.ACTION_SEND);
-                    if (info.activityInfo.packageName.toLowerCase().contains(nameApp) || info.activityInfo.name.toLowerCase().contains(nameApp)) {
-                        targetedShare.putExtra(Intent.EXTRA_SUBJECT, "procesAgro");
-                        targetedShare.putExtra(Intent.EXTRA_TEXT,message);
-                        targetedShare.setPackage(info.activityInfo.packageName);
-                        targetedShareIntents.add(targetedShare);
-                    }
-                }
-                Intent chooserIntent = Intent.createChooser(targetedShareIntents.remove(0), "Seleccione un app para compartir");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetedShareIntents.toArray(new Parcelable[]{}));
-                startActivity(chooserIntent);
-            }
-        }
 
-        catch(Exception e){
-            Log.v("VM","Exception while sending image on" + nameApp + " "+  e.getMessage());
-        }
-    }
 }
