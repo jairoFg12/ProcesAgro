@@ -15,5 +15,7 @@
     <string name="title_activity_call__form5">Call_Form5Activity</string>
     <string name="title_activity_call__form6">Call_Form6Activity</string>
     <string name="title_activity_call__form7">Call_Form7Activity</string>
+    <string name="title_activity_call_finish">CallFinishActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

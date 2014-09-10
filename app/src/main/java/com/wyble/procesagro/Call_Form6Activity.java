@@ -38,7 +38,7 @@ public class Call_Form6Activity extends ActionBarActivity {
                         Integer.parseInt(nacimiento.getText().toString()),
                         Integer.parseInt(compra_animales.getText().toString()),
                         Integer.parseInt(perdida_din.getText().toString()));
-                Intent intent = new Intent(Call_Form6Activity.this, Call_Form7Activity.class);
+                Intent intent = new Intent(Call_Form6Activity.this, CallFinishActivity.class);
                 intent.putExtra("TRAMITE_PASO6", tramite);
                 startActivity(intent);
             }
