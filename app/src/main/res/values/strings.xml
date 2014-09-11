@@ -2,20 +2,19 @@
 <resources>
 
     <string name="app_name">ProcesAgro</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Opciones</string>
     <string name="title_activity_web_view">Web Viewer</string>
     <string name="title_activity_transact">Tramites</string>
     <string name="title_activity_call">Convocatorias</string>
     <string name="title_activity_deals">Ofertas</string>
     <string name="title_activity_conv_detalle">conv_detalle</string>
-    <string name="title_activity_call__form1">Call_Form1Activity</string>
-    <string name="title_activity_call__form2">Call_Form2Activity</string>
-    <string name="title_activity_call__form3">Call_Form3Activity</string>
-    <string name="title_activity_call__form4">Call_Form4Activity</string>
-    <string name="title_activity_call__form5">Call_Form5Activity</string>
-    <string name="title_activity_call__form6">Call_Form6Activity</string>
-    <string name="title_activity_call__form7">Call_Form7Activity</string>
-    <string name="title_activity_call_finish">CallFinishActivity</string>
+    <string name="title_activity_call__form1">Tramite</string>
+    <string name="title_activity_call__form2">Ubicacion</string>
+    <string name="title_activity_call__form3">Solicitante</string>
+    <string name="title_activity_call__form4">Bovinos</string>
+    <string name="title_activity_call__form5">Bufalinos</string>
+    <string name="title_activity_call__form6">Motivo</string>
+    <string name="title_activity_call_finish">Justificación</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

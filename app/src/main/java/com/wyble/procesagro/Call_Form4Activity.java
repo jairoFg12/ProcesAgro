@@ -1,11 +1,13 @@
 package com.wyble.procesagro;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wyble.procesagro.models.Tramite;
 
@@ -16,6 +18,7 @@ public class Call_Form4Activity extends ActionBarActivity {
 
     private Button form4_next;
     private EditText bovino1, bovino2, bovino3, bovino4;
+    Context context= this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +36,22 @@ public class Call_Form4Activity extends ActionBarActivity {
         form4_next = (Button) findViewById(R.id.form4_next);
         form4_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tramite.paso4(Integer.parseInt(bovino1.getText().toString()),
-                        Integer.parseInt(bovino2.getText().toString()),
-                        Integer.parseInt(bovino3.getText().toString()),
-                        Integer.parseInt(bovino4.getText().toString()));
-                Intent intent = new Intent(Call_Form4Activity.this, Call_Form5Activity.class);
-                intent.putExtra("TRAMITE_PASO4", tramite);
-                startActivity(intent);
+                final String bovino1_v= bovino1.getText().toString();
+                final String bovino2_v= bovino1.getText().toString();
+                final String bovino3_v= bovino3.getText().toString();
+                final String bovino4_v= bovino4.getText().toString();
+                if(bovino1_v.equals("") || bovino2_v.equals("") || bovino3_v.equals("") || bovino4_v.equals("")){
+
+                    Toast.makeText(context, "Todos los campos son requeridos.", Toast.LENGTH_SHORT).show();
+                }else{
+                    tramite.paso4(Integer.parseInt(bovino1_v),
+                            Integer.parseInt(bovino2_v),
+                            Integer.parseInt(bovino3_v),
+                            Integer.parseInt(bovino4_v));
+                    Intent intent = new Intent(Call_Form4Activity.this, Call_Form5Activity.class);
+                    intent.putExtra("TRAMITE_PASO4", tramite);
+                    startActivity(intent);
+                }
             }
         });
     }

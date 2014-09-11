@@ -1,11 +1,13 @@
 package com.wyble.procesagro;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wyble.procesagro.models.Tramite;
 
@@ -16,6 +18,7 @@ public class Call_Form3Activity extends ActionBarActivity {
 
     private Button form3_next;
     private EditText nombre_solic, cedula_solic, telefono_solic, celular_solic;
+    Context context= this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,20 @@ public class Call_Form3Activity extends ActionBarActivity {
         form3_next = (Button) findViewById(R.id.form3_next);
         form3_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tramite.paso3(nombre_solic.getText().toString(), cedula_solic.getText().toString(), telefono_solic.getText().toString(), celular_solic.getText().toString());
-                Intent intent = new Intent(Call_Form3Activity.this, Call_Form4Activity.class);
-                intent.putExtra("TRAMITE_PASO3", tramite);
-                startActivity(intent);
+                final String nombre_solic_v= nombre_solic.getText().toString();
+                final String cedula_solic_v= cedula_solic.getText().toString();
+                final String telefono_solic_v= telefono_solic.getText().toString();
+                final String celular_solic_v= celular_solic.getText().toString();
+                if(nombre_solic_v.equals("") || cedula_solic_v.equals("")
+                        || telefono_solic_v.length()==0 || celular_solic_v.length()==0){
+
+                    Toast.makeText(context, "Todos los campos son requeridos.", Toast.LENGTH_SHORT).show();
+                }else{
+                    tramite.paso3(nombre_solic_v, cedula_solic_v, telefono_solic_v, celular_solic_v);
+                    Intent intent = new Intent(Call_Form3Activity.this, Call_Form4Activity.class);
+                    intent.putExtra("TRAMITE_PASO3", tramite);
+                    startActivity(intent);
+                }
             }
         });
     }
