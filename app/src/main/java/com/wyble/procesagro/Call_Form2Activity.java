@@ -1,11 +1,13 @@
 package com.wyble.procesagro;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wyble.procesagro.models.Tramite;
 
@@ -16,6 +18,7 @@ public class Call_Form2Activity extends ActionBarActivity {
 
     private Button form2_next;
     private EditText municipio, departamento;
+    Context context= this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,17 @@ public class Call_Form2Activity extends ActionBarActivity {
         form2_next = (Button) findViewById(R.id.form2_next);
         form2_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tramite.paso2(municipio.getText().toString(), departamento.getText().toString());
-                Intent intent = new Intent(Call_Form2Activity.this, Call_Form3Activity.class);
-                intent.putExtra("TRAMITE_PASO2", tramite);
-                startActivity(intent);
+                final String municipio_v= municipio.getText().toString();
+                final String departamento_v= departamento.getText().toString();
+                if(municipio_v.equals("") || departamento_v.equals("")){
+
+                    Toast.makeText(context, "Todos los campos son requeridos.", Toast.LENGTH_SHORT).show();
+                }else{
+                    tramite.paso2(municipio_v, departamento_v);
+                    Intent intent = new Intent(Call_Form2Activity.this, Call_Form3Activity.class);
+                    intent.putExtra("TRAMITE_PASO2", tramite);
+                    startActivity(intent);
+                }
             }
         });
 
