@@ -6,7 +6,9 @@ package com.wyble.procesagro.helpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Iterator;
+import java.util.Set;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,61 +21,84 @@ import org.json.JSONObject;
 
 public class DB extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "ProcesAgro.db";
+    private static final String DATABASE_NAME = "ProcesAgro.db";
 
-    private String tableName;
-    private JSONArray tableData;
+    private ArrayList<HashMap> tables;
 
-    public DB(Context context, String tableName, JSONArray tableData) {
+    public DB(Context context, ArrayList<HashMap> tables) {
         super(context, DATABASE_NAME, null, 1);
-        this.tableName = tableName;
-        this.tableData = tableData;
-        if (tableData != null) {
-            this.emptyData();
-            this.insertData();
+        this.tables = tables;
+
+        String tableName = null;
+        JSONArray tableData = null;
+
+        for (HashMap table : tables) {
+            Set<Entry> ent = table.entrySet();
+            for (Entry e : ent) {
+                tableName = (String) e.getKey();
+                tableData = (JSONArray) e.getValue();
+            }
+            if (tableData != null) {
+                emptyData(tableName);
+                insertData(tableName, tableData);
+            }
         }
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String tableFields = this.join(this.getTableFields(), ", ");
-        String sql = "CREATE TABLE IF NOT EXISTS " + this.tableName + " (autoId INTEGER PRIMARY KEY AUTOINCREMENT, " + tableFields + ")";
-        db.execSQL(sql);
+        String tableName = null;
+        JSONArray tableData = null;
+
+        for (HashMap table : tables) {
+            Set<Entry> ent = table.entrySet();
+            for (Entry e : ent) {
+                tableName = (String) e.getKey();
+                tableData = (JSONArray) e.getValue();
+            }
+            String tableFields = join(getTableFields(tableData), ", ");
+            String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (autoId INTEGER PRIMARY KEY AUTOINCREMENT, " + tableFields + ")";
+            db.execSQL(sql);
+        }
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + this.tableName);
+        for (HashMap table : this.tables) {
+            String tableName = (String) table.get("tableName");
+            db.execSQL("DROP TABLE IF EXISTS " + tableName);
+        }
         this.onCreate(db);
     }
 
-    private void emptyData() {
+    private void emptyData(String tableName) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(this.tableName, null, null);
-        db.delete("SQLITE_SEQUENCE","NAME = ?",new String[]{this.tableName});
+        db.delete(tableName, null, null);
+        db.delete("SQLITE_SEQUENCE","NAME = ?",new String[]{tableName});
     }
 
-    public void insertData() {
+    private void insertData(String tableName, JSONArray tableData) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        for (int i = 0; i < this.tableData.length(); i++) {
+        for (int i = 0; i < tableData.length(); i++) {
             try {
-                JSONObject jsonObject = this.tableData.getJSONObject(i);
-                for (String tf : this.getTableFields()) {
+                JSONObject jsonObject = tableData.getJSONObject(i);
+                for (String tf : getTableFields(tableData)) {
                     contentValues.put(tf, jsonObject.getString(tf));
                 }
-                db.insert(this.tableName, null, contentValues);
+                db.insert(tableName, null, contentValues);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public ArrayList<HashMap> getAllData() {
+    public ArrayList<HashMap> getAllData(String tableName) {
         ArrayList data = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("SELECT * FROM " + this.tableName, null);
+        Cursor res =  db.rawQuery("SELECT * FROM " + tableName, null);
         res.moveToFirst();
         while(res.isAfterLast() == false){
             HashMap obj = new HashMap();
@@ -87,11 +112,26 @@ public class DB extends SQLiteOpenHelper {
         return data;
     }
 
-    private ArrayList<String> getTableFields() {
+    public HashMap getDataByValue(String tableName, String column, String value) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.query(tableName, new String[] { }, column + "=?",
+                new String[] { String.valueOf(value) }, null, null, null, null);
+        if (res != null)
+            res.moveToFirst();
+
+        HashMap obj = new HashMap();
+        for (int j=0; j < res.getColumnCount(); j++) {
+            obj.put(res.getColumnName(j), res.getString(res.getColumnIndex(res.getColumnName(j))));
+        }
+        res.close();
+        return obj;
+    }
+
+    private ArrayList<String> getTableFields(JSONArray tableData) {
         ArrayList tableFields = new ArrayList();
-        for (int i = 0; i < this.tableData.length(); i++) {
+        for (int i = 0; i < tableData.length(); i++) {
             try {
-                JSONObject jsonObject = this.tableData.getJSONObject(i);
+                JSONObject jsonObject = tableData.getJSONObject(i);
                 for (Iterator it = jsonObject.keys(); it.hasNext(); ) {
                     tableFields.add(String.valueOf(it.next()));
                 }
