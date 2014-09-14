@@ -88,6 +88,10 @@
             android:label="@string/title_activity_call_finish"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".StepsDetailsActivity"
+            android:label="@string/title_activity_steps_details" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

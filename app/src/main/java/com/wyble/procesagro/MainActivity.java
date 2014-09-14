@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.helpers.Webservice;
