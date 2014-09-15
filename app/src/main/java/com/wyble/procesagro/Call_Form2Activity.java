@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.models.Tramite;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Call_Form2Activity extends ActionBarActivity {
@@ -19,6 +22,7 @@ public class Call_Form2Activity extends ActionBarActivity {
     private Button form2_next;
     private EditText municipio, departamento;
     Context context= this;
+    private static final String TRAMITE_TABLE = "tramites";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class Call_Form2Activity extends ActionBarActivity {
         municipio = (EditText) findViewById(R.id.municipio);
         departamento = (EditText) findViewById(R.id.departamento);
 
+        municipio.setText(tramite.getMunicipio());
+        departamento.setText(tramite.getDepartamento());
+
         form2_next = (Button) findViewById(R.id.form2_next);
         form2_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,6 +48,15 @@ public class Call_Form2Activity extends ActionBarActivity {
                     Toast.makeText(context, "Todos los campos son requeridos.", Toast.LENGTH_SHORT).show();
                 }else{
                     tramite.paso2(municipio_v, departamento_v);
+
+                    HashMap hmTramite = new HashMap();
+                    hmTramite.put(TRAMITE_TABLE, tramite.toJSONArray());
+
+                    ArrayList<HashMap> tables = new ArrayList<HashMap>();
+                    tables.add(hmTramite);
+                    DB db = new DB(context, tables);
+                    db.updateData(TRAMITE_TABLE, tramite.toJSONArray(), tramite.getId());
+
                     Intent intent = new Intent(Call_Form2Activity.this, Call_Form3Activity.class);
                     intent.putExtra("TRAMITE_PASO2", tramite);
                     startActivity(intent);

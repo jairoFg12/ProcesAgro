@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.models.Tramite;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Call_Form4Activity extends ActionBarActivity {
@@ -19,6 +22,7 @@ public class Call_Form4Activity extends ActionBarActivity {
     private Button form4_next;
     private EditText bovino1, bovino2, bovino3, bovino4;
     Context context= this;
+    private static final String TRAMITE_TABLE = "tramites";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,11 @@ public class Call_Form4Activity extends ActionBarActivity {
         bovino2 = (EditText) findViewById(R.id.bovino2);
         bovino3 = (EditText) findViewById(R.id.bovino3);
         bovino4 = (EditText) findViewById(R.id.bovino4);
+
+        bovino1.setText(String.valueOf(tramite.getMenor1Bovinos()));
+        bovino2.setText(String.valueOf(tramite.getEntre12Bovinos()));
+        bovino3.setText(String.valueOf(tramite.getEntre23Bovinos()));
+        bovino4.setText(String.valueOf(tramite.getMayores3Bovinos()));
 
         form4_next = (Button) findViewById(R.id.form4_next);
         form4_next.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +57,15 @@ public class Call_Form4Activity extends ActionBarActivity {
                             Integer.parseInt(bovino2_v),
                             Integer.parseInt(bovino3_v),
                             Integer.parseInt(bovino4_v));
+
+                    HashMap hmTramite = new HashMap();
+                    hmTramite.put(TRAMITE_TABLE, tramite.toJSONArray());
+
+                    ArrayList<HashMap> tables = new ArrayList<HashMap>();
+                    tables.add(hmTramite);
+                    DB db = new DB(context, tables);
+                    db.updateData(TRAMITE_TABLE, tramite.toJSONArray(), tramite.getId());
+
                     Intent intent = new Intent(Call_Form4Activity.this, Call_Form5Activity.class);
                     intent.putExtra("TRAMITE_PASO4", tramite);
                     startActivity(intent);

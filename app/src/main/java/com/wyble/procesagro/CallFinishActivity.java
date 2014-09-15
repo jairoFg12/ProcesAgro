@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.models.Tramite;
 
 import org.apache.http.HttpResponse;
@@ -22,6 +23,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class CallFinishActivity extends ActionBarActivity implements View.OnClickListener{
@@ -32,7 +34,8 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
     private Tramite tramite;
     private Context context= this;
 
-    private static final String TRAMITE_URL = "http://181.41.200.108/procesAgroWeb/web/app.php/crearFormulario/";
+    private static final String TRAMITE_URL = "http://procesagro.tucompualdia.com/crearFormulario/";
+    private static final String TRAMITE_TABLE = "tramites";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
         justificacion = (EditText) findViewById(R.id.justificacion);
         terminos = (CheckBox) findViewById(R.id.terminos);
 
+        justificacion.setText(tramite.getJustificacion());
+        terminos.setChecked(tramite.getTerminos());
+
         finish= (Button) findViewById(R.id.endButt);
         finish.setOnClickListener(this);
     }
@@ -53,6 +59,14 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
     public void onClick(View v) {
 
         tramite.paso7(justificacion.getText().toString(), terminos.isChecked());
+
+        HashMap hmTramite = new HashMap();
+        hmTramite.put(TRAMITE_TABLE, tramite.toJSONArray());
+
+        ArrayList<HashMap> tables = new ArrayList<HashMap>();
+        tables.add(hmTramite);
+        DB db = new DB(this, tables);
+        db.updateData(TRAMITE_TABLE, tramite.toJSONArray(), tramite.getId());
 
         ArrayList<String> fields = new ArrayList();
         fields.add(tramite.getIca());
@@ -79,25 +93,32 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
         fields.add(Integer.toString(tramite.getNacimiento()));
         fields.add(Integer.toString(tramite.getCompra()));
         fields.add(Integer.toString(tramite.getPerdidaDIN()));
+        fields.add(tramite.getJustificacion());
 
-        String complete_string = this.TRAMITE_URL + this.join(fields, "/");
-        HttpClient client = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(complete_string);
+        if (tramite.getTerminos()) {
+            String complete_string = this.TRAMITE_URL + this.join(fields, "/");
+            HttpClient client = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet(complete_string);
 
-        try {
-            HttpResponse response = client.execute(httpGet);
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            if (statusCode == 200) {
-                Toast.makeText(context, "Información enviada...", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "Error, intente nuevamente...", Toast.LENGTH_SHORT).show();
+            try {
+                HttpResponse response = client.execute(httpGet);
+                StatusLine statusLine = response.getStatusLine();
+                int statusCode = statusLine.getStatusCode();
+                if (statusCode == 200) {
+                    Toast.makeText(context, "Información enviada con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Formulario guardado, intente enviarlo más tarde", Toast.LENGTH_LONG).show();
+                }
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            Toast.makeText(context, "Formulario guardado con éxito", Toast.LENGTH_LONG).show();
         }
+
+
 
         Intent goToHome= new Intent(CallFinishActivity.this, MainActivity.class);
         startActivity(goToHome);

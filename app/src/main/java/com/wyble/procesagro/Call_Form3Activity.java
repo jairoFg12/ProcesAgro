@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.models.Tramite;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Call_Form3Activity extends ActionBarActivity {
@@ -19,6 +22,7 @@ public class Call_Form3Activity extends ActionBarActivity {
     private Button form3_next;
     private EditText nombre_solic, cedula_solic, telefono_solic, celular_solic;
     Context context= this;
+    private static final String TRAMITE_TABLE = "tramites";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,11 @@ public class Call_Form3Activity extends ActionBarActivity {
         telefono_solic = (EditText) findViewById(R.id.telefono_solic);
         celular_solic = (EditText) findViewById(R.id.celular_solic);
 
+        nombre_solic.setText(tramite.getNombreSolicitante());
+        cedula_solic.setText(tramite.getCedulaSolicitante());
+        telefono_solic.setText(tramite.getFijoSolicitante());
+        celular_solic.setText(tramite.getCelularSolicitante());
+
         form3_next = (Button) findViewById(R.id.form3_next);
         form3_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -46,6 +55,15 @@ public class Call_Form3Activity extends ActionBarActivity {
                     Toast.makeText(context, "Todos los campos son requeridos.", Toast.LENGTH_SHORT).show();
                 }else{
                     tramite.paso3(nombre_solic_v, cedula_solic_v, telefono_solic_v, celular_solic_v);
+
+                    HashMap hmTramite = new HashMap();
+                    hmTramite.put(TRAMITE_TABLE, tramite.toJSONArray());
+
+                    ArrayList<HashMap> tables = new ArrayList<HashMap>();
+                    tables.add(hmTramite);
+                    DB db = new DB(context, tables);
+                    db.updateData(TRAMITE_TABLE, tramite.toJSONArray(), tramite.getId());
+
                     Intent intent = new Intent(Call_Form3Activity.this, Call_Form4Activity.class);
                     intent.putExtra("TRAMITE_PASO3", tramite);
                     startActivity(intent);
