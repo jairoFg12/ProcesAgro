@@ -27,6 +27,14 @@ import java.util.Set;
 
 public class MainActivity extends ActionBarActivity{
 
+    private static final String SERVICIO1_URL = "http://google.com/";
+
+    private static final String SERVICIO2_URL = "https://www.dane.gov.co/index.php/agropecuario-alias/sistema-de-informacion-de-precios-sipsa";
+
+    private static final String SERVICIO3_URL = "http://www.agronet.gov.co/agronetweb1/Agromapas.aspx";
+
+    private static final String SERVICIO4_URL = "http://www.siembra.gov.co/";
+
     private static final String CONVOCATORIAS_URL = "http://tucompualdia.com/aplicaciones/procesAgroWebService/convocatorias.php";
 
     private static final String OFERTAS_URL = "http://tucompualdia.com/aplicaciones/procesAgroWebService/ofertasinstitucionales.php";
@@ -114,7 +122,6 @@ public class MainActivity extends ActionBarActivity{
 
         final ArrayList<Convocatoria> convocatorias = this.getConvocatorias();
         ArrayList<Oferta> ofertas = this.getOfertas();
-        ArrayList<PasoOferta> pasosOfertas = this.getPasosOfertas();
         ArrayList<Servicio> servicios = this.getServicios();
         ArrayList<Tramite> tramites = this.getTramites();
 
@@ -123,6 +130,11 @@ public class MainActivity extends ActionBarActivity{
         } else {
             tramite = initTramite;
         }
+
+        oferta1 = ofertas.get(0);
+        oferta2 = ofertas.get(1);
+        oferta3 = ofertas.get(2);
+        oferta4 = ofertas.get(3);
 
         callView1= (Button) findViewById(R.id.row1_button1);//row1
         callView2= (Button) findViewById(R.id.row1_button2);//row1
@@ -142,47 +154,38 @@ public class MainActivity extends ActionBarActivity{
 
         callView1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 1");
-                String url1= "http://www.google.com";
                 Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                intent.putExtra("URL_PARAMETER", url1);
+                intent.putExtra("URL_PARAMETER", SERVICIO1_URL);
                 startActivity(intent);
             }
         });
 
         callView2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 2");
-                String url2= "http://www.siembra.gov.co/";
                 Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                intent.putExtra("URL_PARAMETER", url2);
+                intent.putExtra("URL_PARAMETER", SERVICIO2_URL);
                 startActivity(intent);
             }
         });
 
         callView3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 3");
-                String url3= "http://www.siembra.gov.co/";
                 Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                intent.putExtra("URL_PARAMETER", url3);
+                intent.putExtra("URL_PARAMETER", SERVICIO3_URL);
                 startActivity(intent);
             }
         });
 
         callView4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 4");
-                String url4= "http://www.corpoica.org.co/";
                 Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                intent.putExtra("URL_PARAMETER", url4);
+                intent.putExtra("URL_PARAMETER", SERVICIO4_URL);
                 startActivity(intent);
             }
         });
 
         callView5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 5");
                 Intent intentToCall = new Intent(MainActivity.this, CallActivity.class);
                 intentToCall.putExtra("CONVOCATORIAS", convocatorias);
                 startActivity(intentToCall);
@@ -191,7 +194,6 @@ public class MainActivity extends ActionBarActivity{
 
         callView6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 6");
                 Intent intentToForm = new Intent(MainActivity.this, Call_Form1Activity.class);
                 intentToForm.putExtra("TRAMITE", tramite);
                 startActivity(intentToForm);
@@ -200,32 +202,32 @@ public class MainActivity extends ActionBarActivity{
 
         callView7.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 7");
                 Intent intentToDeals1 = new Intent(MainActivity.this, DealsActivity.class);
+                intentToDeals1.putExtra("OFERTA", oferta1);
                 startActivity(intentToDeals1);
             }
         });
 
         callView8.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 8");
                 Intent intentToDeals2 = new Intent(MainActivity.this, DealsActivity.class);
+                intentToDeals2.putExtra("OFERTA", oferta2);
                 startActivity(intentToDeals2);
             }
         });
 
         callView9.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 9");
                 Intent intentToDeals3 = new Intent(MainActivity.this, DealsActivity.class);
+                intentToDeals3.putExtra("OFERTA", oferta3);
                 startActivity(intentToDeals3);
             }
         });
 
         callView10.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("events", "clic boton 10");
                 Intent intentToDeals4 = new Intent(MainActivity.this, DealsActivity.class);
+                intentToDeals4.putExtra("OFERTA", oferta4);
                 startActivity(intentToDeals4);
             }
         });
@@ -260,7 +262,8 @@ public class MainActivity extends ActionBarActivity{
                     d.get("tituloOferta").toString(),
                     d.get("descripcionOferta").toString(),
                     d.get("urlAudioOferta").toString(),
-                    d.get("urlOferta").toString()
+                    d.get("urlOferta").toString(),
+                    getPasosOfertaByOfertaId(d.get("id").toString())
             ));
         }
 
@@ -270,35 +273,17 @@ public class MainActivity extends ActionBarActivity{
         return ofertas;
     }
 
-    private Oferta getOfertaById(String id) {
-        HashMap data = db.getDataByValue(OFERTAS_TABLE, "id", id);
-        Oferta oferta = new Oferta(
-            Integer.parseInt(data.get("autoId").toString()),
-            data.get("usuario_id").toString(),
-            data.get("tituloOferta").toString(),
-            data.get("descripcionOferta").toString(),
-            data.get("urlAudioOferta").toString(),
-            data.get("urlOferta").toString()
-        );
-        db.close();
-        return oferta;
-    }
-
-    private ArrayList<PasoOferta> getPasosOfertas() {
-        ArrayList pasosOfertas = new ArrayList();
-        ArrayList<HashMap> data = db.getAllData(PASOS_OFERTAS_TABLE);
+    private ArrayList<PasoOferta> getPasosOfertaByOfertaId(String id) {
+        ArrayList<PasoOferta> pasosOfertas = new ArrayList<PasoOferta>();
+        ArrayList<HashMap> data = db.getDataByValue(PASOS_OFERTAS_TABLE, "ofertaInstitucional_id", id);
         for (HashMap d : data) {
             pasosOfertas.add(new PasoOferta(
                     Integer.parseInt(d.get("autoId").toString()),
                     d.get("tituloPasos").toString(),
                     d.get("descripcionPaso").toString(),
-                    d.get("urlPaso").toString(),
-                    getOfertaById(d.get("ofertaInstitucional_id").toString())
+                    d.get("urlPaso").toString()
             ));
         }
-
-        /*{"id":"6","tituloPasos":"sadasdasdasd","descripcionPaso":"asdasd asd as das d asd as","urlPaso":"http:\/\/paso.com","ofertaInstitucional_id":"1"},*/
-
         db.close();
         return pasosOfertas;
     }

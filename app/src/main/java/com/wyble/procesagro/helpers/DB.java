@@ -114,19 +114,23 @@ public class DB extends SQLiteOpenHelper {
         return data;
     }
 
-    public HashMap getDataByValue(String tableName, String column, String value) {
+    public ArrayList<HashMap> getDataByValue(String tableName, String column, String value) {
+        ArrayList<HashMap> data = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.query(tableName, new String[] { }, column + "=?",
                 new String[] { String.valueOf(value) }, null, null, null, null);
         if (res != null)
             res.moveToFirst();
-
-        HashMap obj = new HashMap();
-        for (int j=0; j < res.getColumnCount(); j++) {
-            obj.put(res.getColumnName(j), res.getString(res.getColumnIndex(res.getColumnName(j))));
+        while(res.isAfterLast() == false){
+            HashMap obj = new HashMap();
+            for (int j=0; j < res.getColumnCount(); j++) {
+                obj.put(res.getColumnName(j), res.getString(res.getColumnIndex(res.getColumnName(j))));
+            }
+            data.add(obj);
+            res.moveToNext();
         }
         res.close();
-        return obj;
+        return data;
     }
 
     private ArrayList<String> getTableFields(JSONArray tableData) {

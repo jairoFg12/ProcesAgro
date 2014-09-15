@@ -1,9 +1,12 @@
 package com.wyble.procesagro.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * Created by david on 9/11/14.
  */
-public class Oferta {
+public class Oferta implements Serializable {
 
     private int id;
 
@@ -17,13 +20,16 @@ public class Oferta {
 
     private String url;
 
-    public Oferta(int id, String usuario, String titulo, String descripcion, String url_audio, String url) {
+    private ArrayList<PasoOferta> pasos_oferta;
+
+    public Oferta(int id, String usuario, String titulo, String descripcion, String url_audio, String url, ArrayList<PasoOferta> pasos_oferta) {
         this.id = id;
         this.usuario = usuario;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.url_audio = url_audio;
         this.url = url;
+        this.pasos_oferta = pasos_oferta;
     }
 
     @Override
@@ -53,5 +59,9 @@ public class Oferta {
 
     public String getUrl() {
         return url;
+    }
+
+    public ArrayList<PasoOferta> getPasosOferta() {
+        return pasos_oferta;
     }
 }
