@@ -33,7 +33,7 @@ public class DealsActivity extends ActionBarActivity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Serializable dataFromMain = getIntent().getSerializableExtra("OFERTA");
-        Oferta oferta = (Oferta) dataFromMain;
+        final Oferta oferta = (Oferta) dataFromMain;
 
         tituloOferta = (TextView) findViewById(R.id.deal_title);
         descripcionOferta = (TextView) findViewById(R.id.deal_descripcion);
@@ -47,10 +47,10 @@ public class DealsActivity extends ActionBarActivity {
 
         pasosOfertaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*Intent intent = new Intent(DealsActivity.this, ConvDetalle.class);
-                Convocatoria item = convocatorias.get(position);
-                intent.putExtra("CONVOCATORIA_ITEM", item);
-                startActivity(intent);*/
+                Intent intent = new Intent(DealsActivity.this, StepsDetailsActivity.class);
+                PasoOferta pasoOferta = oferta.getPasosOferta().get(position);
+                intent.putExtra("PASO_OFERTA", pasoOferta);
+                startActivity(intent);
             }
         });
     }
