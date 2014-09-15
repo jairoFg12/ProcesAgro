@@ -28,21 +28,6 @@ public class DB extends SQLiteOpenHelper {
     public DB(Context context, ArrayList<HashMap> tables) {
         super(context, DATABASE_NAME, null, 1);
         this.tables = tables;
-
-        String tableName = null;
-        JSONArray tableData = null;
-
-        for (HashMap table : tables) {
-            Set<Entry> ent = table.entrySet();
-            for (Entry e : ent) {
-                tableName = (String) e.getKey();
-                tableData = (JSONArray) e.getValue();
-            }
-            if (tableData != null) {
-                emptyData(tableName);
-                insertData(tableName, tableData);
-            }
-        }
     }
 
     @Override
@@ -72,13 +57,13 @@ public class DB extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    private void emptyData(String tableName) {
+    public void emptyData(String tableName) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(tableName, null, null);
         db.delete("SQLITE_SEQUENCE","NAME = ?",new String[]{tableName});
     }
 
-    private void insertData(String tableName, JSONArray tableData) {
+    public void insertData(String tableName, JSONArray tableData) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -89,6 +74,23 @@ public class DB extends SQLiteOpenHelper {
                     contentValues.put(tf, jsonObject.getString(tf));
                 }
                 db.insert(tableName, null, contentValues);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateData(String tableName, JSONArray tableData, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        for (int i = 0; i < tableData.length(); i++) {
+            try {
+                JSONObject jsonObject = tableData.getJSONObject(i);
+                for (String tf : getTableFields(tableData)) {
+                    contentValues.put(tf, jsonObject.getString(tf));
+                }
+                db.update(tableName, contentValues, "autoId =" + id, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.helpers.Webservice;
@@ -15,12 +14,15 @@ import com.wyble.procesagro.models.Convocatoria;
 import com.wyble.procesagro.models.Oferta;
 import com.wyble.procesagro.models.PasoOferta;
 import com.wyble.procesagro.models.Servicio;
+import com.wyble.procesagro.models.Tramite;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity{
@@ -41,9 +43,21 @@ public class MainActivity extends ActionBarActivity{
 
     private static final String SERVICIOS_TABLE = "servicios";
 
+    private static final String TRAMITE_TABLE = "tramites";
+
     private ArrayList<HashMap> tables;
 
     private DB db;
+
+    private Oferta oferta1;
+
+    private Oferta oferta2;
+
+    private Oferta oferta3;
+
+    private Oferta oferta4;
+
+    private Tramite tramite;
 
     Button callView1;
     Button callView2;
@@ -66,7 +80,6 @@ public class MainActivity extends ActionBarActivity{
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
         tables = new ArrayList<HashMap>();
 
         Webservice wsConvocatorias = new Webservice(CONVOCATORIAS_URL);
@@ -78,23 +91,38 @@ public class MainActivity extends ActionBarActivity{
         HashMap<String, JSONArray> hmOfertas = new HashMap();
         HashMap<String, JSONArray> hmPasosOfertas = new HashMap();
         HashMap<String, JSONArray> hmServicios = new HashMap();
+        HashMap<String, JSONArray> hmTramite = new HashMap();
 
         hmConvocatorias.put(CONVOCATORIAS_TABLE, wsConvocatorias.parseJsonText(wsConvocatorias.getJsonText()));
         hmOfertas.put(OFERTAS_TABLE, wsOfertas.parseJsonText(wsOfertas.getJsonText()));
         hmPasosOfertas.put(PASOS_OFERTAS_TABLE, wsPasosOfertas.parseJsonText(wsPasosOfertas.getJsonText()));
         hmServicios.put(SERVICIOS_TABLE, wsServicios.parseJsonText(wsServicios.getJsonText()));
+        Tramite initTramite = new Tramite();
+        hmTramite.put(TRAMITE_TABLE, initTramite.toJSONArray());
 
         tables.add(hmConvocatorias);
         tables.add(hmOfertas);
         tables.add(hmPasosOfertas);
         tables.add(hmServicios);
+        tables.add(hmTramite);
 
         db = new DB(this, tables);
+        this.initDataTable(hmConvocatorias);
+        this.initDataTable(hmOfertas);
+        this.initDataTable(hmPasosOfertas);
+        this.initDataTable(hmServicios);
+
         final ArrayList<Convocatoria> convocatorias = this.getConvocatorias();
         ArrayList<Oferta> ofertas = this.getOfertas();
         ArrayList<PasoOferta> pasosOfertas = this.getPasosOfertas();
         ArrayList<Servicio> servicios = this.getServicios();
+        ArrayList<Tramite> tramites = this.getTramites();
 
+        if (tramites.size() > 0) {
+            tramite = tramites.get(tramites.size() - 1);
+        } else {
+            tramite = initTramite;
+        }
 
         callView1= (Button) findViewById(R.id.row1_button1);//row1
         callView2= (Button) findViewById(R.id.row1_button2);//row1
@@ -165,6 +193,7 @@ public class MainActivity extends ActionBarActivity{
             public void onClick(View v) {
                 Log.d("events", "clic boton 6");
                 Intent intentToForm = new Intent(MainActivity.this, Call_Form1Activity.class);
+                intentToForm.putExtra("TRAMITE", tramite);
                 startActivity(intentToForm);
             }
         });
@@ -294,6 +323,58 @@ public class MainActivity extends ActionBarActivity{
         return servicios;
     }
 
+    private ArrayList<Tramite> getTramites() {
+        ArrayList tramites = new ArrayList();
+        ArrayList<HashMap> data = db.getAllData(TRAMITE_TABLE);
 
+        for (HashMap d : data) {
+            Tramite tramite = new Tramite();
+            tramite.setId(Integer.parseInt(d.get("autoId").toString()));
+            tramite.setIca(d.get("ica3101").toString());
+            tramite.setNombreFinca(d.get("nombreFinca").toString());
+            tramite.setNombrePropietario(d.get("nombrePropietarioFinca").toString());
+            tramite.setCedulaPropietario(d.get("cedulaPropietarioFinca").toString());
+            tramite.setFijoPropietario(d.get("telefonoFijoPropietario").toString());
+            tramite.setCelularPropietario(d.get("telefonoCelularPropietario").toString());
+            tramite.setMunicipio(d.get("municipioVereda").toString());
+            tramite.setDepartamento(d.get("departamento").toString());
+            tramite.setNombreSolicitante(d.get("nombreSolicitante").toString());
+            tramite.setCedulaSolicitante(d.get("cedulaSolicitante").toString());
+            tramite.setFijoSolicitante(d.get("telefonoFijoSolicitante").toString());
+            tramite.setCelularSolicitante(d.get("telefonoCelularSolicitante").toString());
+            tramite.setMenor1Bovinos(Integer.parseInt(d.get("menUnoBovino").toString()));
+            tramite.setEntre12Bovinos(Integer.parseInt(d.get("unoDosBovino").toString()));
+            tramite.setEntre23Bovinos(Integer.parseInt(d.get("dosTresBovino").toString()));
+            tramite.setMayores3Bovinos(Integer.parseInt(d.get("tresMayorBovino").toString()));
+            tramite.setMenor1Bufalino(Integer.parseInt(d.get("menUnoBufalino").toString()));
+            tramite.setEntre12Bufalino(Integer.parseInt(d.get("unoDosBufalino").toString()));
+            tramite.setEntre23Bufalino(Integer.parseInt(d.get("dosTresBufalino").toString()));
+            tramite.setMayor3Bufalino(Integer.parseInt(d.get("tresMayorBufalino").toString()));
+            tramite.setPrimeraVez(Integer.parseInt(d.get("jusPrimera").toString()));
+            tramite.setNacimiento(Integer.parseInt(d.get("jusNacimiento").toString()));
+            tramite.setCompra(Integer.parseInt(d.get("jusCompraAnimales").toString()));
+            tramite.setPerdidaDIN(Integer.parseInt(d.get("jusPerdidaDin").toString()));
+            tramite.setJustificacion(d.get("justificacion").toString());
+            tramite.setTerminos(Boolean.parseBoolean(d.get("terminos").toString()));
+            tramites.add(tramite);
+        }
+        db.close();
+        return tramites;
+    }
+
+    private void initDataTable(HashMap hmTable) {
+        String tableName = null;
+        JSONArray tableData = null;
+
+        Set<Map.Entry> ent = hmTable.entrySet();
+        for (Map.Entry e : ent) {
+            tableName = (String) e.getKey();
+            tableData = (JSONArray) e.getValue();
+        }
+        if (tableData != null) {
+            db.emptyData(tableName);
+            db.insertData(tableName, tableData);
+        }
+    }
 
 }
