@@ -18,5 +18,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_ofertas">Ofertas</string>
     <string name="title_activity_steps_details">StepsDetailsActivity</string>
+    <string name="title_activity_main_search">MainSearch</string>
 
 </resources>
