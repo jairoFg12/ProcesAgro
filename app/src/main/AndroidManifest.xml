@@ -92,6 +92,10 @@
             android:name=".StepsDetailsActivity"
             android:label="@string/title_activity_steps_details" >
         </activity>
+        <activity
+            android:name=".MainSearch"
+            android:label="@string/title_activity_main_search" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
