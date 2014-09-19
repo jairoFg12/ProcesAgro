@@ -18,21 +18,46 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logoView"
+                android:src="@drawable/logo" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/acercade_btn"
+                android:background="@drawable/acerca_de" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:weightSum="1">
 
             <EditText
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText"
                 android:hint="Ingresar busqueda..."
-                android:drawableRight="@drawable/abc_ic_search_api_holo_light"
-                android:layout_weight="0.81"
-                android:inputType="text" />
+                android:inputType="text"
+                android:background="@drawable/buscar"
+                android:editable="false"
+                android:padding="12dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buscar_button"
+                android:background="@drawable/boton_buscar" />
 
         </LinearLayout>
 
@@ -48,15 +73,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row1_button1"
-                android:background="@drawable/valora_negocio"
-                android:layout_margin="1dp" />
+                android:background="@drawable/cursos_virtuales" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row1_button2"
-                android:background="@drawable/cursos_virtuales"
-                android:layout_margin="1dp" />
+                android:background="@drawable/agromapas" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,15 +94,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row2_button1"
-                android:background="@drawable/e_granja"
-                android:layout_margin="1dp" />
+                android:background="@drawable/sipsa" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row2_button2"
-                android:background="@drawable/sipsa"
-                android:layout_margin="1dp" />
+                android:background="@drawable/siembra" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +115,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/row3_button1"
                 android:background="@drawable/convocatorias"
-                android:layout_margin="1dp"
                 android:text="Titulo Convocatoria\nDescripción Corta"
                 android:textSize="22dp"
                 android:paddingBottom="30dp"
@@ -113,8 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row4_button1"
-                android:background="@drawable/identifica"
-                android:layout_margin="1dp" />
+                android:background="@drawable/identifica" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,15 +146,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row5_button1"
-                android:background="@drawable/cert_fitosanitario_exp"
-                android:layout_margin="1dp" />
+                android:background="@drawable/autorizacion" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row5_button2"
-                android:background="@drawable/cert_fitosanitario"
-                android:layout_margin="1dp" />
+                android:background="@drawable/certificado" />
 
         </LinearLayout>
 
@@ -150,17 +167,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row6_button1"
-                android:background="@drawable/kampo"
-                android:layout_margin="1dp" />
+                android:background="@drawable/tramite_tarj" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/row6_button2"
-                android:background="@drawable/admon_incentivo"
-                android:layout_margin="1dp" />
+                android:background="@drawable/incentivo" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 
