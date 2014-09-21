@@ -1,10 +1,13 @@
 package com.wyble.procesagro;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.wyble.procesagro.helpers.CustomAdapter;
@@ -13,13 +16,11 @@ import com.wyble.procesagro.models.Convocatoria;
 import com.wyble.procesagro.models.Oferta;
 import com.wyble.procesagro.models.PasoOferta;
 import com.wyble.procesagro.models.Servicio;
-import com.wyble.procesagro.models.Tramite;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-public class MainSearch extends ActionBarActivity {
+public class MainSearch extends ActionBarActivity implements ListView.OnItemClickListener {
 
     private String textToSearch;
 
@@ -57,25 +58,26 @@ public class MainSearch extends ActionBarActivity {
         if (convocatorias.size() > 0) {
             mAdapter.addSectionHeaderItem("Convocatorias");
             for (Convocatoria c : convocatorias) {
-                mAdapter.addItem(c.getTitulo());
+                mAdapter.addItem(c);
             }
         }
         if (ofertas.size() > 0) {
             mAdapter.addSectionHeaderItem("Ofertas");
             for (Oferta o : ofertas) {
-                mAdapter.addItem(o.getTitulo());
+                mAdapter.addItem(o);
             }
         }
         if (servicios.size() > 0) {
             mAdapter.addSectionHeaderItem("Servicios");
             for (Servicio s : servicios) {
-                mAdapter.addItem(s.getTitulo());
+                mAdapter.addItem(s);
             }
         }
         if (convocatorias.size() == 0 && ofertas.size() == 0 && servicios.size() == 0) {
             mAdapter.addSectionHeaderItem("No hay resultados");
         }
         mainSearchListView.setAdapter(mAdapter);
+        mainSearchListView.setOnItemClickListener(this);
     }
 
     private ArrayList<Convocatoria> getConvocatoriasByName(String name) {
@@ -152,19 +154,35 @@ public class MainSearch extends ActionBarActivity {
         return servicios;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = null;
+        CustomAdapter adapter = (CustomAdapter) parent.getAdapter();
+        Object obj = adapter.getItem(position);
+        if (obj.getClass().getName().equals("com.wyble.procesagro.models.Convocatoria")) {
+            intent = new Intent(MainSearch.this, ConvDetalle.class);
+            Convocatoria item = (Convocatoria) obj;
+            intent.putExtra("CONVOCATORIA_ITEM", item);
+        } else if (obj.getClass().getName().equals("com.wyble.procesagro.models.Oferta")) {
+            intent = new Intent(MainSearch.this, DealsActivity.class);
+            Oferta item = (Oferta) obj;
+            intent.putExtra("OFERTA", item);
+        } else if (obj.getClass().getName().equals("com.wyble.procesagro.models.Servicio")) {
+            intent = new Intent(MainSearch.this, WebViewActivity.class);
+            Servicio item = (Servicio) obj;
+            intent.putExtra("URL_PARAMETER", item.getUrl_servicio());
+        }
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_search, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
