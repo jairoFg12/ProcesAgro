@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.helpers.Webservice;
@@ -66,6 +67,10 @@ public class MainActivity extends ActionBarActivity{
     private Oferta oferta4;
 
     private Tramite tramite;
+
+    private EditText searchText;
+
+    private Button searchBtn;
 
     Button callView1;
     Button callView2;
@@ -135,6 +140,9 @@ public class MainActivity extends ActionBarActivity{
         oferta2 = ofertas.get(1);
         oferta3 = ofertas.get(2);
         oferta4 = ofertas.get(3);
+
+        searchText = (EditText) findViewById(R.id.editText);
+        searchBtn = (Button) findViewById(R.id.buscar_button);
 
         callView1= (Button) findViewById(R.id.row1_button1);//row1
         callView2= (Button) findViewById(R.id.row1_button2);//row1
@@ -229,6 +237,15 @@ public class MainActivity extends ActionBarActivity{
                 Intent intentToDeals4 = new Intent(MainActivity.this, DealsActivity.class);
                 intentToDeals4.putExtra("OFERTA", oferta4);
                 startActivity(intentToDeals4);
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String textToSearch = String.valueOf(searchText.getText());
+                Intent intentToMainSearch = new Intent(MainActivity.this, MainSearch.class);
+                intentToMainSearch.putExtra("TEXTO_BUSCAR", textToSearch);
+                startActivity(intentToMainSearch);
             }
         });
 
