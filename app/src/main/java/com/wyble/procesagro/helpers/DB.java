@@ -114,6 +114,31 @@ public class DB extends SQLiteOpenHelper {
         return data;
     }
 
+    public ArrayList<HashMap> getDataByName(String tableName, String column, String value) {
+        ArrayList<HashMap> data = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        /*query(String table, String[] columns, String selection,
+                String[] selectionArgs, String groupBy, String having,
+                String orderBy)*/
+        Cursor res = db.query(tableName,
+                new String[] { },
+                column + " LIKE ? ",
+                new String[] { "%" + String.valueOf(value) + "%"},
+                null, null, null);
+        if (res != null)
+            res.moveToFirst();
+        while(res.isAfterLast() == false){
+            HashMap obj = new HashMap();
+            for (int j=0; j < res.getColumnCount(); j++) {
+                obj.put(res.getColumnName(j), res.getString(res.getColumnIndex(res.getColumnName(j))));
+            }
+            data.add(obj);
+            res.moveToNext();
+        }
+        res.close();
+        return data;
+    }
+
     public ArrayList<HashMap> getDataByValue(String tableName, String column, String value) {
         ArrayList<HashMap> data = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
