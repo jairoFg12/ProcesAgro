@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:scrollbars="none" >
+    android:scrollbars="none">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,8 +17,8 @@
         android:id="@+id/linearLayout"
         android:paddingLeft="2dp"
         android:paddingTop="2dp"
-        android:paddingRight="2dp"
-        android:paddingBottom="2dp">
+        android:padding="2dp"
+        android:paddingRight="2dp">
 
         <LinearLayout
             android:orientation="horizontal"
