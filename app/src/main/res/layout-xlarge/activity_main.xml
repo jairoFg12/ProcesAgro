@@ -14,11 +14,7 @@
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:id="@+id/linearLayout"
-        android:paddingLeft="2dp"
-        android:paddingTop="2dp"
-        android:paddingRight="2dp"
-        android:paddingBottom="2dp">
+        android:id="@+id/linearLayout">
 
         <LinearLayout
             android:orientation="horizontal"
