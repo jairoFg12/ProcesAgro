@@ -96,6 +96,10 @@
             android:name=".MainSearch"
             android:label="@string/title_activity_main_search" >
         </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

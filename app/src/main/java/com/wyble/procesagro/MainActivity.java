@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,6 +81,7 @@ public class MainActivity extends ActionBarActivity{
     Button callView8;
     Button callView9;
     Button callView10;
+    Button AboutCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +159,7 @@ public class MainActivity extends ActionBarActivity{
         callView8= (Button) findViewById(R.id.row5_button2);//row5
         callView9= (Button) findViewById(R.id.row6_button1);//row6
         callView10= (Button) findViewById(R.id.row6_button2);//row6
+        AboutCall= (Button) findViewById(R.id.acercade_btn);//About button
 
         callView1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -246,6 +247,13 @@ public class MainActivity extends ActionBarActivity{
                 Intent intentToMainSearch = new Intent(MainActivity.this, MainSearch.class);
                 intentToMainSearch.putExtra("TEXTO_BUSCAR", textToSearch);
                 startActivity(intentToMainSearch);
+            }
+        });
+
+        AboutCall.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intentToAbout = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intentToAbout);
             }
         });
 
