@@ -1,11 +1,8 @@
 package com.wyble.procesagro;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -93,7 +90,6 @@ public class MainSearch extends ActionBarActivity implements ListView.OnItemClic
                     d.get("usuario_id").toString()
             ));
         }
-
         db.close();
         return convocatorias;
     }
@@ -112,9 +108,7 @@ public class MainSearch extends ActionBarActivity implements ListView.OnItemClic
                     getPasosOfertaByOfertaId(d.get("id").toString())
             ));
         }
-
         /*{"id":"1","usuario_id":"2","tituloOferta":"COMPRA DE ARTICULOS","descripcionOferta":"sadasdas","urlAudioOferta":"http:\/\/gos.com","urlOferta":"http:\/\/gos.com"},*/
-
         db.close();
         return ofertas;
     }
@@ -147,9 +141,7 @@ public class MainSearch extends ActionBarActivity implements ListView.OnItemClic
                     d.get("urlServicio").toString()
             ));
         }
-
         /*{"id":"2","usuario_id":"2","tituloServicio":"Servicio 1","descripcionServicio":"DEscripcion del servicio","urlAudioServicio":"https:\/\/www.google.com\/glass\/start\/","urlServicio":"http:\/\/audio.com"}*/
-
         db.close();
         return servicios;
     }
@@ -173,20 +165,5 @@ public class MainSearch extends ActionBarActivity implements ListView.OnItemClic
             intent.putExtra("URL_PARAMETER", item.getUrl_servicio());
         }
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
