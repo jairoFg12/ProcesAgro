@@ -30,7 +30,6 @@ public class DealsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deals);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Serializable dataFromMain = getIntent().getSerializableExtra("OFERTA");
         final Oferta oferta = (Oferta) dataFromMain;

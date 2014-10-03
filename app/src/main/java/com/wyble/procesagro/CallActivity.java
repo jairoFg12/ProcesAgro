@@ -24,7 +24,6 @@ public class CallActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Serializable dataFromMainActivity = getIntent().getSerializableExtra("CONVOCATORIAS");
         final ArrayList<Convocatoria> convocatorias = (ArrayList<Convocatoria>) dataFromMainActivity;

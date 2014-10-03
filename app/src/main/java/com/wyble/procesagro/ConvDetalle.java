@@ -42,7 +42,6 @@ public class ConvDetalle extends ActionBarActivity {
         facebookBtn = (Button) findViewById(R.id.facebookBtn);
         twitterBtn = (Button) findViewById(R.id.twitterBtn);
 
-        getActionBar().setTitle(convocatoria.getTitulo());
         tituloConv.setText(convocatoria.getTitulo());
         descConv.setText(convocatoria.getDescripcionLarga());
 
