@@ -1,108 +1,106 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.wyble.procesagro.CallFinishActivity"
-    android:background="#53A563">
-
+    android:background="#fff"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/about_main_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:weightSum="1"
-        android:id="@+id/form4_layout"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Justificación en caso\nde re-identificación..."
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"
-        android:gravity="center_vertical|center_horizontal" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/justificacion"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"
-        android:hint="justificación..." />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Acuerdos de terminos y condiciones"
-        android:id="@+id/textView2"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"
-        android:gravity="center_vertical|center_horizontal" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        android:id="@+id/textView3"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acepto Términos y Condiciones"
-        android:id="@+id/terminos"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"
-        android:checked="true" />
-
-
-
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="#0099CC"
-        android:id="@+id/relativeLayout"
-        android:gravity="center_vertical|center_horizontal">
-
-
-       <!-- <Button
+        <LinearLayout
+            android:id="@+id/form4_layout"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Siguiente"
-            android:drawableTop="@android:drawable/ic_media_next"
-            android:id="@+id/form6_next"
-            android:textColor="#ffffff"
-            android:textSize="14dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="#0099cc" />-->
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Enviar"
-            android:textColor="#ffffff"
-            android:drawableTop="@android:drawable/ic_menu_send"
-            android:textSize="14dp"
-            android:id="@+id/endButt"
+            android:layout_height="fill_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="#0099cc"/>
+            android:orientation="vertical"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:weightSum="1">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.11"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Justificación en caso\nde re-identificación..." />
 
-</RelativeLayout>
+            <EditText
+                android:id="@+id/justificacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.11"
+                android:hint="justificación..." />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.11"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Acuerdos de terminos y condiciones" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.11"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <CheckBox
+                android:id="@+id/terminos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.11"
+                android:checked="true"
+                android:text="Acepto Términos y Condiciones" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:background="#0099CC"
+                android:gravity="center_vertical|center_horizontal">
+
+                <Button
+                    android:id="@+id/endButt"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="#0099cc"
+                    android:drawableTop="@android:drawable/ic_menu_send"
+                    android:text="Enviar"
+                    android:textColor="#ffffff"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

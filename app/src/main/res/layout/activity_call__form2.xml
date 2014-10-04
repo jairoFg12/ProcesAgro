@@ -1,75 +1,76 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.wyble.procesagro.Call_Form2Activity"
-    android:background="#fff">
+    android:background="#fff"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/about_main_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:weightSum="1"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="1">
+
+    <LinearLayout
         android:id="@+id/form2_layout"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:weightSum="1">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Ubicación Finca"
-            android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.11"
             android:gravity="center_vertical|center_horizontal"
+            android:text="Ubicación Finca"
             android:textSize="15dp" />
 
         <EditText
+            android:id="@+id/municipio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/municipio"
+            android:maxLength="30"
             android:layout_gravity="center_horizontal"
-            android:hint="Municipio o Vereda"
-            android:layout_marginTop="@dimen/activity_vertical_margin" />
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:hint="Municipio o Vereda" />
 
         <EditText
+            android:id="@+id/departamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/departamento"
             android:layout_gravity="center_horizontal"
-            android:hint="Departamento" />
-
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="#0099CC"
-        android:id="@+id/relativeLayout"
-        android:gravity="center_vertical|center_horizontal">
-
+            android:ems="10"
+            android:maxLength="30"
+            android:hint="Departamento"
+            android:inputType="textPersonName" />
 
         <Button
+            android:id="@+id/form2_next"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Siguiente"
-            android:drawableTop="@android:drawable/ic_media_next"
-            android:id="@+id/form2_next"
-            android:textColor="#ffffff"
-            android:textSize="14dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="#0099cc" />
+            android:background="#0099cc"
+            android:drawableTop="@android:drawable/ic_media_next"
+            android:text="Siguiente"
+            android:textColor="#ffffff"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
 
-    </RelativeLayout>
-
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>
