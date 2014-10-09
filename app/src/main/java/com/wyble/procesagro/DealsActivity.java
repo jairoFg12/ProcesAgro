@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wyble.procesagro.helpers.CheckAdapter;
 import com.wyble.procesagro.models.Convocatoria;
 import com.wyble.procesagro.models.Oferta;
 import com.wyble.procesagro.models.PasoOferta;
@@ -40,14 +41,16 @@ public class DealsActivity extends ActionBarActivity {
         tituloOferta.setText(oferta.getTitulo());
         descripcionOferta.setText(oferta.getDescripcion());
 
+        CheckAdapter mAdapter = new CheckAdapter(this, R.layout.check_list_item, oferta.getPasosOferta());
         pasosOfertaListView = (ListView) findViewById(R.id.pasoslistView);
-        ArrayAdapter<PasoOferta> arrayAdapter = new ArrayAdapter<PasoOferta>(this, R.layout.convocatoria_text_view, oferta.getPasosOferta());
-        pasosOfertaListView.setAdapter(arrayAdapter);
+        pasosOfertaListView.setAdapter(mAdapter);
 
         pasosOfertaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CheckAdapter adapter = (CheckAdapter) parent.getAdapter();
+                PasoOferta pasoOferta = adapter.getItem(position);
+
                 Intent intent = new Intent(DealsActivity.this, StepsDetailsActivity.class);
-                PasoOferta pasoOferta = oferta.getPasosOferta().get(position);
                 intent.putExtra("PASO_OFERTA", pasoOferta);
                 startActivity(intent);
             }

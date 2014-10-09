@@ -15,6 +15,8 @@ public class PasoOferta implements Serializable {
 
     private String url;
 
+    private Boolean is_checked;
+
     public PasoOferta(int id, String titulo, String descripcion, String url) {
         this.id = id;
         this.titulo = titulo;
@@ -43,4 +45,11 @@ public class PasoOferta implements Serializable {
         return url;
     }
 
+    public Boolean getIsChecked() {
+        return is_checked;
+    }
+
+    public void setIsChecked(Boolean is_checked) {
+        this.is_checked = is_checked;
+    }
 }
