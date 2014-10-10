@@ -140,7 +140,7 @@ public class MainActivity extends ActionBarActivity{
         this.initDataTable(hmServicios);
 
         ArrayList<PasoOferta> pasos_ofertas = this.getPasosOferta();
-        this.initMisPasosOfertas(pasos_ofertas);
+        //this.initMisPasosOfertas(pasos_ofertas);
 
         final ArrayList<Convocatoria> convocatorias = this.getConvocatorias();
         ArrayList<Oferta> ofertas = this.getOfertas();
@@ -432,7 +432,7 @@ public class MainActivity extends ActionBarActivity{
         return mis_pasos_ofertas;
     }
 
-    private void initMisPasosOfertas(ArrayList<PasoOferta> pasosOfertas) {
+    /*private void initMisPasosOfertas(ArrayList<PasoOferta> pasosOfertas) {
         for (PasoOferta pasoOferta : pasosOfertas) {
             ArrayList mis_pasos_ofertas = this.getMisPasosOfertasByPasoOferta(valueOf(pasoOferta.getId()));
 
@@ -440,6 +440,6 @@ public class MainActivity extends ActionBarActivity{
             db.insertData(MIS_PASOS_OFERTA_TABLE, miPasoOferta.toJSONArray());
         }
         db.close();
-    }
+    }*/
 
 }
