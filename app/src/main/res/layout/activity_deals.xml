@@ -24,11 +24,11 @@
             android:text="titulo oferta"
             android:id="@+id/deal_title"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.14"
             android:gravity="center_vertical"
             android:background="#53A563"
             android:textColor="#fff"
-            android:padding="12dp" />
+            android:padding="1dp"
+            android:paddingStart="2dp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -38,7 +38,7 @@
             android:id="@+id/deal_descripcion"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.83"
-            android:padding="15dp" />
+            android:padding="1dp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -47,11 +47,10 @@
             android:text="Pasos"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.14"
             android:background="#53A563"
             android:textColor="#fff"
             android:gravity="center_vertical"
-            android:paddingStart="15dp" />
+            android:paddingStart="2dp" />
 
         <ListView
             android:layout_width="match_parent"
