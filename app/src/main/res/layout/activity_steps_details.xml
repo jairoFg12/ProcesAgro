@@ -24,7 +24,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/step_detail_title"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.10"
             android:gravity="center_vertical"
             android:hint="Titulo paso"
             android:padding="12dp"

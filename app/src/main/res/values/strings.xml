@@ -7,7 +7,7 @@
     <string name="title_activity_transact">Tramites</string>
     <string name="title_activity_call">Convocatorias</string>
     <string name="title_activity_deals">Ofertas</string>
-    <string name="title_activity_conv_detalle">conv_detalle</string>
+    <string name="title_activity_conv_detalle">Detalles convocatorias</string>
     <string name="title_activity_call__form1">Tramite</string>
     <string name="title_activity_call__form2">Ubicacion</string>
     <string name="title_activity_call__form3">Solicitante</string>

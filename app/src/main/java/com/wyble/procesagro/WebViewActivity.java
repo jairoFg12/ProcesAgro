@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -22,6 +23,8 @@ public class WebViewActivity extends ActionBarActivity {
         url_setter= dataFromHomeActivity.getString("URL_PARAMETER");
 
         webView1_aux= (WebView) findViewById(R.id.webView1);
+        WebSettings webSettings = webView1_aux.getSettings();
+        webSettings.setJavaScriptEnabled(true);
         webView1_aux.loadUrl(url_setter);
         webView1_aux.setWebViewClient(new WebViewClient());
     }

@@ -52,6 +52,7 @@
             android:name=".ConvDetalle"
             android:label="@string/title_activity_conv_detalle"
             android:screenOrientation="portrait" >
+            
         </activity>
         <activity
             android:name=".Call_Form1Activity"
