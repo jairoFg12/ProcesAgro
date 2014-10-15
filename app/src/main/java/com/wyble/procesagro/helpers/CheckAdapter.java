@@ -51,6 +51,8 @@ public class CheckAdapter extends ArrayAdapter<PasoOferta> {
                     CheckBox cb = (CheckBox) v ;
                     PasoOferta pasoOferta = (PasoOferta) cb.getTag();
                     pasoOferta.setIsChecked(cb.isChecked());
+
+                    Log.d(CheckAdapter.class.getName(), "Checked!!!!");
                 }
             });
         }

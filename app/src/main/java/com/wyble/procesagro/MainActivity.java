@@ -19,6 +19,7 @@ import com.wyble.procesagro.models.Tramite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,11 +55,9 @@ public class MainActivity extends ActionBarActivity{
 
     private static final String PASOS_OFERTAS_TABLE = "pasos_ofertas";
 
-    private static final String MIS_PASOS_OFERTA_TABLE = "mis_pasos_ofertas";
-
     private static final String SERVICIOS_TABLE = "servicios";
 
-    private static final String TRAMITE_TABLE = "traites";
+    private static final String TRAMITE_TABLE = "tramites";
 
     private ArrayList<HashMap> tables;
 
@@ -110,18 +109,12 @@ public class MainActivity extends ActionBarActivity{
         HashMap<String, JSONArray> hmConvocatorias = new HashMap();
         HashMap<String, JSONArray> hmOfertas = new HashMap();
         HashMap<String, JSONArray> hmPasosOfertas = new HashMap();
-        HashMap<String, JSONArray> hmMisPasosOfertas = new HashMap();
         HashMap<String, JSONArray> hmServicios = new HashMap();
         HashMap<String, JSONArray> hmTramite = new HashMap();
 
         hmConvocatorias.put(CONVOCATORIAS_TABLE, wsConvocatorias.parseJsonText(wsConvocatorias.getJsonText()));
         hmOfertas.put(OFERTAS_TABLE, wsOfertas.parseJsonText(wsOfertas.getJsonText()));
-        hmPasosOfertas.put(PASOS_OFERTAS_TABLE, wsPasosOfertas.parseJsonText(wsPasosOfertas.getJsonText()));
-        try {
-            hmMisPasosOfertas.put(MIS_PASOS_OFERTA_TABLE, new JSONArray("[{ 'paso_oferta_id' : '', 'is_checked' : '' }]"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        hmPasosOfertas.put(PASOS_OFERTAS_TABLE, parseJsonText(wsPasosOfertas.getJsonText()));
         hmServicios.put(SERVICIOS_TABLE, wsServicios.parseJsonText(wsServicios.getJsonText()));
         Tramite initTramite = new Tramite();
         hmTramite.put(TRAMITE_TABLE, initTramite.toJSONArray());
@@ -129,7 +122,6 @@ public class MainActivity extends ActionBarActivity{
         tables.add(hmConvocatorias);
         tables.add(hmOfertas);
         tables.add(hmPasosOfertas);
-        tables.add(hmMisPasosOfertas);
         tables.add(hmServicios);
         tables.add(hmTramite);
 
@@ -276,6 +268,19 @@ public class MainActivity extends ActionBarActivity{
 
     }
 
+    private JSONArray parseJsonText(String jsonText) {
+        JSONArray jsonArray = null;
+        JSONObject jsonIsChecked = new JSONObject();
+        try {
+            jsonArray = new JSONArray(jsonText);
+            jsonIsChecked.put("is_checked", false);
+            jsonArray.put(jsonIsChecked);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonArray;
+    }
+
     private ArrayList<Convocatoria> getConvocatorias() {
         ArrayList convocatorias = new ArrayList();
         ArrayList<HashMap> data = db.getAllData(CONVOCATORIAS_TABLE);
@@ -418,28 +423,5 @@ public class MainActivity extends ActionBarActivity{
             db.insertData(tableName, tableData);
         }
     }
-
-    private ArrayList<MiPasoOferta> getMisPasosOfertasByPasoOferta(String paso_oferta_id) {
-        ArrayList mis_pasos_ofertas = new ArrayList();
-        ArrayList<HashMap> data = db.getDataByValue(MIS_PASOS_OFERTA_TABLE, "paso_oferta_id", paso_oferta_id);
-        for (HashMap d : data) {
-            mis_pasos_ofertas.add(new MiPasoOferta(
-                    Integer.parseInt(d.get("paso_oferta_id").toString()),
-                    Boolean.parseBoolean(d.get("is_checked").toString())
-            ));
-        }
-        db.close();
-        return mis_pasos_ofertas;
-    }
-
-    /*private void initMisPasosOfertas(ArrayList<PasoOferta> pasosOfertas) {
-        for (PasoOferta pasoOferta : pasosOfertas) {
-            ArrayList mis_pasos_ofertas = this.getMisPasosOfertasByPasoOferta(valueOf(pasoOferta.getId()));
-
-            MiPasoOferta miPasoOferta = new MiPasoOferta(pasoOferta.getId(), FALSE);
-            db.insertData(MIS_PASOS_OFERTA_TABLE, miPasoOferta.toJSONArray());
-        }
-        db.close();
-    }*/
 
 }
