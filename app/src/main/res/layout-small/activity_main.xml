@@ -22,15 +22,16 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill_horizontal|fill_vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/logoView"
-                android:src="@drawable/logo"
-                android:contentDescription="procesAgro" />
+                android:contentDescription="procesAgro"
+                android:src="@drawable/logo_small" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editText"
                 android:inputType="text"
-                android:background="@drawable/buscar"
+                android:background="@drawable/buscar_small"
                 android:editable="false" />
 
             <Button
