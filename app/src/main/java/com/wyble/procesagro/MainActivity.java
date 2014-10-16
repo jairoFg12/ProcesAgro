@@ -134,11 +134,11 @@ public class MainActivity extends ActionBarActivity{
         tables.add(hmTramite);
 
         db = new DB(this, tables);
-        this.initDataTable(hmConvocatorias);
-        this.initDataTable(hmOfertas);
-        this.initDataTable(hmPasosOfertas);
-        this.initDataTable(hmServicios);
-        this.initDataTable(hmCursosVirt);
+        db.initDataTable(hmConvocatorias);
+        db.initDataTable(hmOfertas);
+        db.initDataTable(hmPasosOfertas);
+        db.initDataTable(hmServicios);
+        db.initDataTable(hmCursosVirt);
 
         final ArrayList<Convocatoria> convocatorias = this.getConvocatorias();
         ArrayList<Oferta> ofertas = this.getOfertas();
@@ -451,21 +451,6 @@ public class MainActivity extends ActionBarActivity{
         }
         db.close();
         return tramites;
-    }
-
-    private void initDataTable(HashMap hmTable) {
-        String tableName = null;
-        JSONArray tableData = null;
-
-        Set<Map.Entry> ent = hmTable.entrySet();
-        for (Map.Entry e : ent) {
-            tableName = (String) e.getKey();
-            tableData = (JSONArray) e.getValue();
-        }
-        if (tableData != null) {
-            db.emptyData(tableName);
-            db.insertData(tableName, tableData);
-        }
     }
 
 }
