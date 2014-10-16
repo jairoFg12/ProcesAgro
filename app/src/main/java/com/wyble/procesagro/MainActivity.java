@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.helpers.Webservice;
@@ -111,12 +112,12 @@ public class MainActivity extends ActionBarActivity{
         Webservice wsServicios = new Webservice(SERVICIOS_URL);
         Webservice wsCursosVirt = new Webservice(CURSOS_VIRTUALES_URL);
 
-        HashMap<String, JSONArray> hmConvocatorias = new HashMap();
-        HashMap<String, JSONArray> hmOfertas = new HashMap();
-        HashMap<String, JSONArray> hmPasosOfertas = new HashMap();
-        HashMap<String, JSONArray> hmServicios = new HashMap();
+        final HashMap<String, JSONArray> hmConvocatorias = new HashMap();
+        final HashMap<String, JSONArray> hmOfertas = new HashMap();
+        final HashMap<String, JSONArray> hmPasosOfertas = new HashMap();
+        final HashMap<String, JSONArray> hmServicios = new HashMap();
+        final HashMap<String, JSONArray> hmCursosVirt = new HashMap();
         HashMap<String, JSONArray> hmTramite = new HashMap();
-        HashMap<String, JSONArray> hmCursosVirt = new HashMap();
 
         hmConvocatorias.put(CONVOCATORIAS_TABLE, wsConvocatorias.parseJsonText(wsConvocatorias.getJsonText()));
         hmOfertas.put(OFERTAS_TABLE, wsOfertas.parseJsonText(wsOfertas.getJsonText()));
@@ -134,11 +135,7 @@ public class MainActivity extends ActionBarActivity{
         tables.add(hmTramite);
 
         db = new DB(this, tables);
-        db.initDataTable(hmConvocatorias);
-        db.initDataTable(hmOfertas);
-        db.initDataTable(hmPasosOfertas);
-        db.initDataTable(hmServicios);
-        db.initDataTable(hmCursosVirt);
+
 
         final ArrayList<Convocatoria> convocatorias = this.getConvocatorias();
         ArrayList<Oferta> ofertas = this.getOfertas();
@@ -283,7 +280,12 @@ public class MainActivity extends ActionBarActivity{
 
         UpdateCall.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //live long and prosper!
+                Toast.makeText(MainActivity.this, "La información se está actualizando.", Toast.LENGTH_LONG).show();
+                db.initDataTable(hmConvocatorias);
+                db.initDataTable(hmOfertas);
+                db.initDataTable(hmPasosOfertas);
+                db.initDataTable(hmServicios);
+                db.initDataTable(hmCursosVirt);
             }
         });
     }

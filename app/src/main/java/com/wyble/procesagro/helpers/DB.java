@@ -46,7 +46,18 @@ public class DB extends SQLiteOpenHelper {
             String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (autoId INTEGER PRIMARY KEY AUTOINCREMENT, " + tableFields + ")";
             db.execSQL(sql);
 
-
+            ContentValues contentValues = new ContentValues();
+            for (int i = 0; i < tableData.length(); i++) {
+                try {
+                    JSONObject jsonObject = tableData.getJSONObject(i);
+                    for (String tf : getTableFields(tableData)) {
+                        contentValues.put(tf, jsonObject.getString(tf));
+                    }
+                    db.insert(tableName, null, contentValues);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -60,7 +71,7 @@ public class DB extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void initDataTable(HashMap hmTable) {
+   public void initDataTable(HashMap hmTable) {
         String tableName = null;
         JSONArray tableData = null;
 
@@ -96,6 +107,8 @@ public class DB extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
+
+        db.close();
     }
 
     public void updateData(String tableName, JSONArray tableData, int id) {
@@ -113,6 +126,8 @@ public class DB extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
+
+        db.close();
     }
 
     public ArrayList<HashMap> getAllData(String tableName) {

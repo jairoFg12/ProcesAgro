@@ -1,6 +1,8 @@
 package com.wyble.procesagro;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,7 @@ public class CursosVirtuales extends ActionBarActivity {
 
     private ListView cursosListView;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
