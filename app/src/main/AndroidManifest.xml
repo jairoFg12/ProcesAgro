@@ -110,6 +110,9 @@
         <activity
             android:name=".CursosVirtuales"
             android:label="@string/title_activity_cursos_virtuales" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.MainActivity" />
         </activity>
         <activity
             android:name=".CursoDetalle"
