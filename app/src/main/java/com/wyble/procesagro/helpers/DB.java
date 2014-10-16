@@ -6,6 +6,7 @@ package com.wyble.procesagro.helpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Iterator;
 import java.util.Set;
@@ -44,6 +45,8 @@ public class DB extends SQLiteOpenHelper {
             String tableFields = join(getTableFields(tableData), ", ");
             String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (autoId INTEGER PRIMARY KEY AUTOINCREMENT, " + tableFields + ")";
             db.execSQL(sql);
+
+
         }
 
     }
@@ -55,6 +58,21 @@ public class DB extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + tableName);
         }
         this.onCreate(db);
+    }
+
+    public void initDataTable(HashMap hmTable) {
+        String tableName = null;
+        JSONArray tableData = null;
+
+        Set<Map.Entry> ent = hmTable.entrySet();
+        for (Map.Entry e : ent) {
+            tableName = (String) e.getKey();
+            tableData = (JSONArray) e.getValue();
+        }
+        if (tableData != null) {
+            emptyData(tableName);
+            insertData(tableName, tableData);
+        }
     }
 
     public void emptyData(String tableName) {
