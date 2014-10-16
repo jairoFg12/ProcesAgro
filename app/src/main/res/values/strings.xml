@@ -20,5 +20,7 @@
     <string name="title_activity_steps_details">Detalle</string>
     <string name="title_activity_main_search">Buscador...</string>
     <string name="title_activity_about">Acerca de...</string>
+    <string name="title_activity_cursos_virtuales">Cursos Virtuales</string>
+    <string name="title_activity_curso_detalle">CursoDetalle</string>
 
 </resources>

@@ -121,7 +121,8 @@ public class MainSearch extends ActionBarActivity implements ListView.OnItemClic
                     Integer.parseInt(d.get("autoId").toString()),
                     d.get("tituloPasos").toString(),
                     d.get("descripcionPaso").toString(),
-                    d.get("urlPaso").toString()
+                    d.get("urlPaso").toString(),
+                    Boolean.parseBoolean(d.get("isChecked").toString())
             ));
         }
         db.close();
