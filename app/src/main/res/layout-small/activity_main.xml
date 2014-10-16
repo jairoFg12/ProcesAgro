@@ -24,29 +24,46 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill_horizontal|fill_vertical">
+            android:gravity="right">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/logoView"
-                android:contentDescription="procesAgro"
-                android:src="@drawable/logo_small" />
+                android:src="@drawable/logo"
+                android:contentDescription="procesAgro" />-->
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/acercade_btn"
-                android:background="@drawable/acerca_de" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:background="#fff">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/actualizar_btn"
+                    android:background="@drawable/actualizar" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/acercade_btn"
+                    android:background="@drawable/acerca_de" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center|center_vertical|center_horizontal">
 
             <EditText
                 android:layout_width="wrap_content"

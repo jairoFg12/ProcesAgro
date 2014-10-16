@@ -18,21 +18,38 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/logoView"
                 android:src="@drawable/logo"
-                android:contentDescription="procesAgro" />
+                android:contentDescription="procesAgro" />-->
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/acercade_btn"
-                android:background="@drawable/acerca_de" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:background="#fff">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/actualizar_btn"
+                    android:background="@drawable/actualizar" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/acercade_btn"
+                    android:background="@drawable/acerca_de" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
