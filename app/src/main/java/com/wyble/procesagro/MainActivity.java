@@ -33,11 +33,11 @@ import java.util.TimerTask;
 
 public class MainActivity extends ActionBarActivity{
 
-    private static final String SERVICIO1_URL = "http://google.com/";
+    //private static final String SERVICIO1_URL = "http://google.com/";
 
-    private static final String SERVICIO2_URL = "https://www.dane.gov.co/index.php/agropecuario-alias/sistema-de-informacion-de-precios-sipsa";
+    private static final String SERVICIO2_URL = "http://www.agronet.gov.co/agronetweb1/Agromapas.aspx";
 
-    private static final String SERVICIO3_URL = "http://www.agronet.gov.co/agronetweb1/Agromapas.aspx";
+    private static final String SERVICIO3_URL = "https://www.dane.gov.co/index.php/agropecuario-alias/sistema-de-informacion-de-precios-sipsa";
 
     private static final String SERVICIO4_URL = "http://www.siembra.gov.co/";
 
