@@ -91,6 +91,7 @@ public class MainActivity extends ActionBarActivity{
     Button callView9;
     Button callView10;
     Button AboutCall;
+    Button UpdateCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +182,7 @@ public class MainActivity extends ActionBarActivity{
         callView9= (Button) findViewById(R.id.row6_button1);//row6
         callView10= (Button) findViewById(R.id.row6_button2);//row6
         AboutCall= (Button) findViewById(R.id.acercade_btn);//About button
+        UpdateCall= (Button) findViewById(R.id.actualizar_btn);//Update button
 
         callView1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -279,6 +281,11 @@ public class MainActivity extends ActionBarActivity{
             }
         });
 
+        UpdateCall.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //live long and prosper!
+            }
+        });
     }
 
     private JSONArray parsePasosOfertasJsonText(String jsonText) {
