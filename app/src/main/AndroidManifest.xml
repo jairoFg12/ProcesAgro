@@ -35,7 +35,8 @@
         </activity>
         <activity
             android:name=".CallActivity"
-            android:label="@string/title_activity_call" >
+            android:label="@string/title_activity_call"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wyble.procesagro.MainActivity" />
@@ -91,16 +92,18 @@
         </activity>
         <activity
             android:name=".StepsDetailsActivity"
-            android:label="@string/title_activity_steps_details" >
+            android:label="@string/title_activity_steps_details"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainSearch"
-            android:label="@string/title_activity_main_search" >
+            android:label="@string/title_activity_main_search"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wyble.procesagro.MainActivity" />
