@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,23 +12,22 @@ import android.widget.EditText;
 import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.helpers.Webservice;
 import com.wyble.procesagro.models.Convocatoria;
-import com.wyble.procesagro.models.MiPasoOferta;
+import com.wyble.procesagro.models.CursoVirtual;
 import com.wyble.procesagro.models.Oferta;
 import com.wyble.procesagro.models.PasoOferta;
 import com.wyble.procesagro.models.Servicio;
 import com.wyble.procesagro.models.Tramite;
 
 import org.json.JSONArray;
-import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.valueOf;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends ActionBarActivity{
@@ -48,17 +48,19 @@ public class MainActivity extends ActionBarActivity{
 
     private static final String SERVICIOS_URL = "http://tucompualdia.com/aplicaciones/procesAgroWebService/servicios.php";
 
+    private static final String CURSOS_VIRTUALES_URL = "http://tucompualdia.com/aplicaciones/procesAgroWebService/cursosvirtuales.php";
+
     private static final String CONVOCATORIAS_TABLE = "convocatorias";
 
     private static final String OFERTAS_TABLE = "ofertas";
 
     private static final String PASOS_OFERTAS_TABLE = "pasos_ofertas";
 
-    private static final String MIS_PASOS_OFERTA_TABLE = "mis_pasos_ofertas";
-
     private static final String SERVICIOS_TABLE = "servicios";
 
-    private static final String TRAMITE_TABLE = "traites";
+    private static final String TRAMITE_TABLE = "tramites";
+
+    private static final String CURSOS_VIRTUALES_TABLE = "cursos_virtuales";
 
     private ArrayList<HashMap> tables;
 
@@ -106,31 +108,28 @@ public class MainActivity extends ActionBarActivity{
         Webservice wsOfertas = new Webservice(OFERTAS_URL);
         Webservice wsPasosOfertas = new Webservice(PASOS_OFERTAS_URL);
         Webservice wsServicios = new Webservice(SERVICIOS_URL);
+        Webservice wsCursosVirt = new Webservice(CURSOS_VIRTUALES_URL);
 
         HashMap<String, JSONArray> hmConvocatorias = new HashMap();
         HashMap<String, JSONArray> hmOfertas = new HashMap();
         HashMap<String, JSONArray> hmPasosOfertas = new HashMap();
-        HashMap<String, JSONArray> hmMisPasosOfertas = new HashMap();
         HashMap<String, JSONArray> hmServicios = new HashMap();
         HashMap<String, JSONArray> hmTramite = new HashMap();
+        HashMap<String, JSONArray> hmCursosVirt = new HashMap();
 
         hmConvocatorias.put(CONVOCATORIAS_TABLE, wsConvocatorias.parseJsonText(wsConvocatorias.getJsonText()));
         hmOfertas.put(OFERTAS_TABLE, wsOfertas.parseJsonText(wsOfertas.getJsonText()));
-        hmPasosOfertas.put(PASOS_OFERTAS_TABLE, wsPasosOfertas.parseJsonText(wsPasosOfertas.getJsonText()));
-        try {
-            hmMisPasosOfertas.put(MIS_PASOS_OFERTA_TABLE, new JSONArray("[{ 'paso_oferta_id' : '', 'is_checked' : '' }]"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        hmPasosOfertas.put(PASOS_OFERTAS_TABLE, parsePasosOfertasJsonText(wsPasosOfertas.getJsonText()));
         hmServicios.put(SERVICIOS_TABLE, wsServicios.parseJsonText(wsServicios.getJsonText()));
+        hmCursosVirt.put(CURSOS_VIRTUALES_TABLE, wsCursosVirt.parseJsonText(wsCursosVirt.getJsonText()));
         Tramite initTramite = new Tramite();
         hmTramite.put(TRAMITE_TABLE, initTramite.toJSONArray());
 
         tables.add(hmConvocatorias);
         tables.add(hmOfertas);
         tables.add(hmPasosOfertas);
-        tables.add(hmMisPasosOfertas);
         tables.add(hmServicios);
+        tables.add(hmCursosVirt);
         tables.add(hmTramite);
 
         db = new DB(this, tables);
@@ -138,13 +137,10 @@ public class MainActivity extends ActionBarActivity{
         this.initDataTable(hmOfertas);
         this.initDataTable(hmPasosOfertas);
         this.initDataTable(hmServicios);
-
-        ArrayList<PasoOferta> pasos_ofertas = this.getPasosOferta();
-        //this.initMisPasosOfertas(pasos_ofertas);
+        this.initDataTable(hmCursosVirt);
 
         final ArrayList<Convocatoria> convocatorias = this.getConvocatorias();
         ArrayList<Oferta> ofertas = this.getOfertas();
-        ArrayList<Servicio> servicios = this.getServicios();
         ArrayList<Tramite> tramites = this.getTramites();
 
         if (tramites.size() > 0) {
@@ -167,9 +163,17 @@ public class MainActivity extends ActionBarActivity{
         callView4= (Button) findViewById(R.id.row2_button2);//row2
 
         callView5= (Button) findViewById(R.id.row3_button1);//row3
-        Random randomGenerator = new Random();
-        int index = randomGenerator.nextInt(convocatorias.size());
-        callView5.setText(convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
+
+        Timer myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Random randomGenerator = new Random();
+                int index = randomGenerator.nextInt(convocatorias.size());
+                //callView5.setText(convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
+                Log.d(MainActivity.class.getName(), convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
+            }
+        }, 0, 4000);
 
         callView6= (Button) findViewById(R.id.row4_button1);//row4
         callView7= (Button) findViewById(R.id.row5_button1);//row5
@@ -180,8 +184,9 @@ public class MainActivity extends ActionBarActivity{
 
         callView1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                intent.putExtra("URL_PARAMETER", SERVICIO1_URL);
+                ArrayList<CursoVirtual> cursosVirtuales = getCursosVirtuales();
+                Intent intent = new Intent(MainActivity.this, CursosVirtuales.class);
+                intent.putExtra("CURSOS_VIRTUALES", cursosVirtuales);
                 startActivity(intent);
             }
         });
@@ -276,6 +281,24 @@ public class MainActivity extends ActionBarActivity{
 
     }
 
+    private JSONArray parsePasosOfertasJsonText(String jsonText) {
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = new JSONArray(jsonText);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    jsonObject.put("isChecked", "false");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonArray;
+    }
+
     private ArrayList<Convocatoria> getConvocatorias() {
         ArrayList convocatorias = new ArrayList();
         ArrayList<HashMap> data = db.getAllData(CONVOCATORIAS_TABLE);
@@ -292,6 +315,23 @@ public class MainActivity extends ActionBarActivity{
 
         db.close();
         return convocatorias;
+    }
+
+    private ArrayList<CursoVirtual> getCursosVirtuales() {
+        ArrayList cursosVirtuales = new ArrayList();
+        ArrayList<HashMap> data = db.getAllData(CURSOS_VIRTUALES_TABLE);
+        for (HashMap d : data) {
+            cursosVirtuales.add(new CursoVirtual(
+                    Integer.parseInt(d.get("autoId").toString()),
+                    d.get("nombreCurso").toString(),
+                    d.get("descripcionCurso").toString(),
+                    d.get("urlAudio").toString(),
+                    d.get("urlCurso").toString()
+            ));
+        }
+
+        db.close();
+        return cursosVirtuales;
     }
 
     private ArrayList<Oferta> getOfertas() {
@@ -323,7 +363,8 @@ public class MainActivity extends ActionBarActivity{
                     Integer.parseInt(d.get("autoId").toString()),
                     d.get("tituloPasos").toString(),
                     d.get("descripcionPaso").toString(),
-                    d.get("urlPaso").toString()
+                    d.get("urlPaso").toString(),
+                    Boolean.parseBoolean(d.get("isChecked").toString())
             ));
         }
         db.close();
@@ -338,7 +379,8 @@ public class MainActivity extends ActionBarActivity{
                     Integer.parseInt(d.get("autoId").toString()),
                     d.get("tituloPasos").toString(),
                     d.get("descripcionPaso").toString(),
-                    d.get("urlPaso").toString()
+                    d.get("urlPaso").toString(),
+                    Boolean.parseBoolean(d.get("isChecked").toString())
             ));
         }
         db.close();
@@ -418,28 +460,5 @@ public class MainActivity extends ActionBarActivity{
             db.insertData(tableName, tableData);
         }
     }
-
-    private ArrayList<MiPasoOferta> getMisPasosOfertasByPasoOferta(String paso_oferta_id) {
-        ArrayList mis_pasos_ofertas = new ArrayList();
-        ArrayList<HashMap> data = db.getDataByValue(MIS_PASOS_OFERTA_TABLE, "paso_oferta_id", paso_oferta_id);
-        for (HashMap d : data) {
-            mis_pasos_ofertas.add(new MiPasoOferta(
-                    Integer.parseInt(d.get("paso_oferta_id").toString()),
-                    Boolean.parseBoolean(d.get("is_checked").toString())
-            ));
-        }
-        db.close();
-        return mis_pasos_ofertas;
-    }
-
-    /*private void initMisPasosOfertas(ArrayList<PasoOferta> pasosOfertas) {
-        for (PasoOferta pasoOferta : pasosOfertas) {
-            ArrayList mis_pasos_ofertas = this.getMisPasosOfertasByPasoOferta(valueOf(pasoOferta.getId()));
-
-            MiPasoOferta miPasoOferta = new MiPasoOferta(pasoOferta.getId(), FALSE);
-            db.insertData(MIS_PASOS_OFERTA_TABLE, miPasoOferta.toJSONArray());
-        }
-        db.close();
-    }*/
 
 }

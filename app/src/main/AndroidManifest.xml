@@ -53,7 +53,6 @@
             android:name=".ConvDetalle"
             android:label="@string/title_activity_conv_detalle"
             android:screenOrientation="portrait" >
-            
         </activity>
         <activity
             android:name=".Call_Form1Activity"
@@ -107,6 +106,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wyble.procesagro.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CursosVirtuales"
+            android:label="@string/title_activity_cursos_virtuales" >
+        </activity>
+        <activity
+            android:name=".CursoDetalle"
+            android:label="@string/title_activity_curso_detalle" >
         </activity>
     </application>
 

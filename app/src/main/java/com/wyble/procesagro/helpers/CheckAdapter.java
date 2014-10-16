@@ -13,11 +13,15 @@ import android.widget.TextView;
 import com.wyble.procesagro.R;
 import com.wyble.procesagro.models.PasoOferta;
 
+import org.json.JSONArray;
+
 /**
  * Created by david on 10/3/14.
  */
 public class CheckAdapter extends ArrayAdapter<PasoOferta> {
 
+    private DB db;
+    private static final String PASOS_OFERTAS_TABLE = "pasos_ofertas";
 
     private ArrayList<PasoOferta> mData = new ArrayList();
     private LayoutInflater mInflater;
@@ -27,6 +31,9 @@ public class CheckAdapter extends ArrayAdapter<PasoOferta> {
         this.mData.addAll(pasosOferta);
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        ArrayList tables = new ArrayList();
+        db = new DB(context, tables);
     }
 
     public static class ViewHolder {
@@ -51,6 +58,8 @@ public class CheckAdapter extends ArrayAdapter<PasoOferta> {
                     CheckBox cb = (CheckBox) v ;
                     PasoOferta pasoOferta = (PasoOferta) cb.getTag();
                     pasoOferta.setIsChecked(cb.isChecked());
+
+                    db.updateData(PASOS_OFERTAS_TABLE, pasoOferta.toJSONArray(), pasoOferta.getId());
                 }
             });
         }
