@@ -3,7 +3,7 @@
 
     <string name="app_name">ProcesAgro</string>
     <string name="action_settings">Opciones</string>
-    <string name="title_activity_web_view">Web Viewer</string>
+    <string name="title_activity_web_view">Web</string>
     <string name="title_activity_transact">Tramites</string>
     <string name="title_activity_call">Convocatorias</string>
     <string name="title_activity_deals">Ofertas</string>
@@ -17,7 +17,7 @@
     <string name="title_activity_call_finish">Justificación</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_ofertas">Ofertas</string>
-    <string name="title_activity_steps_details">Detalle</string>
+    <string name="title_activity_steps_details">Detalles</string>
     <string name="title_activity_main_search">Buscador...</string>
     <string name="title_activity_about">Acerca de...</string>
 
