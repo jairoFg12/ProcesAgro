@@ -13,6 +13,6 @@
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/pantalla_inicio" />
+        android:src="@drawable/pantalla_inicio_big" />
 
 </RelativeLayout>
