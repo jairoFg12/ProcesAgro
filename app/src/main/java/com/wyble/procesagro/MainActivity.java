@@ -16,6 +16,7 @@ import com.wyble.procesagro.helpers.DB;
 import com.wyble.procesagro.helpers.Webservice;
 import com.wyble.procesagro.models.Convocatoria;
 import com.wyble.procesagro.models.CursoVirtual;
+import com.wyble.procesagro.models.Departamento;
 import com.wyble.procesagro.models.Oferta;
 import com.wyble.procesagro.models.PasoOferta;
 import com.wyble.procesagro.models.Servicio;
@@ -314,6 +315,7 @@ public class MainActivity extends ActionBarActivity{
                 db.initDataTable(hmPasosOfertas);
                 db.initDataTable(hmServicios);
                 db.initDataTable(hmCursosVirt);
+                db.initDataTable(hmDepartamentos);
             }
         });
     }
@@ -370,6 +372,22 @@ public class MainActivity extends ActionBarActivity{
         db.close();
         return cursosVirtuales;
     }
+
+    private ArrayList<Departamento> getDepartamentos() {
+        ArrayList departamentos = new ArrayList();
+        ArrayList<HashMap> data = db.getAllData(DEPARTAMENTOS_TABLE);
+        for (HashMap d : data) {
+            departamentos.add(new Departamento(
+                    Integer.parseInt(d.get("autoId").toString()),
+                    d.get("nombreDepartamento").toString()
+            ));
+        }
+
+        this.db.close();
+        return departamentos;
+    }
+
+
 
     private ArrayList<Oferta> getOfertas() {
         ArrayList ofertas = new ArrayList();

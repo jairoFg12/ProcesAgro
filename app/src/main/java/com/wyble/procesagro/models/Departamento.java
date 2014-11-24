@@ -26,4 +26,5 @@ public class Departamento implements Serializable {
 
     public String getNombreDepartamento() { return this.nombreDepartamento; }
 
+
 }
