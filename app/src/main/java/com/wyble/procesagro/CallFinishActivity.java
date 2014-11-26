@@ -85,6 +85,7 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
             } else {
                 if (justificacionString.length() < 20 || justificacionString.length() > 200) {
                     Toast.makeText(CallFinishActivity.this, "La justificación debe tener al menos 20 letras y máximo 200.", Toast.LENGTH_SHORT).show();
+                    justificacion.requestFocus();
                 } else {
                     new AsyncSaveData().execute();
                 }
