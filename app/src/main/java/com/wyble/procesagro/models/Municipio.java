@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by flia on 24/11/14.
  */
-public class Municipio implements Serializable{
+public class Municipio implements Serializable {
 
     private int id;
 
