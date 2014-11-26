@@ -13,9 +13,12 @@ public class Departamento implements Serializable {
 
 
 
+
+
     public Departamento(int id, String nombreDepartamento) {
         this.id = id;
         this.nombreDepartamento = nombreDepartamento;
+
     }
 
     public String toString() {
@@ -25,6 +28,8 @@ public class Departamento implements Serializable {
     public int getId() { return this.id; }
 
     public String getNombreDepartamento() { return this.nombreDepartamento; }
+
+
 
 
 }

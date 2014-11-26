@@ -390,6 +390,7 @@ public class MainActivity extends ActionBarActivity{
             departamentos.add(new Departamento(
                     Integer.parseInt(d.get("autoId").toString()),
                     d.get("nombreDepartamento").toString()
+
             ));
         }
 
