@@ -319,6 +319,9 @@ public class MainActivity extends ActionBarActivity{
         UpdateCall.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "La información se está actualizando.", Toast.LENGTH_LONG).show();
+                db.emptyData(MUNICIPIOS_TABLE);
+                db.emptyData(DEPARTAMENTOS_TABLE);
+
                 db.initDataTable(hmConvocatorias);
                 db.initDataTable(hmOfertas);
                 db.initDataTable(hmPasosOfertas);
@@ -326,6 +329,7 @@ public class MainActivity extends ActionBarActivity{
                 db.initDataTable(hmCursosVirt);
                 db.initDataTable(hmDepartamentos);
                 db.initDataTable(hmMunicipios);
+                Toast.makeText(MainActivity.this, "Actualizado correctamente.", Toast.LENGTH_LONG).show();
             }
         });
     }
