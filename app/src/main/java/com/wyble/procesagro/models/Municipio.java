@@ -1,0 +1,25 @@
+package com.wyble.procesagro.models;
+
+import java.io.Serializable;
+
+public class Municipio implements Serializable {
+    private int id;
+    private String nombreMunicipio;
+    private String departamento;
+
+    public Municipio(int id, String nombreMunicipio, String departamento) {
+        this.id = id;
+        this.nombreMunicipio = nombreMunicipio;
+        this.departamento = departamento;
+    }
+
+    public String toString() {
+        return this.nombreMunicipio;
+    }
+
+    public int getId() { return this.id; }
+
+    public String getNombreMunicipio() { return this.nombreMunicipio; }
+
+    public String getDepartamento() { return this.departamento; }
+}
