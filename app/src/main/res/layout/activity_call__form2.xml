@@ -63,7 +63,7 @@
             android:id="@+id/municipio"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.11"
-            android:entries="@array/towns_list"
+
             android:spinnerMode="dialog" />
 
        <!-- <EditText

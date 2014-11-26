@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wyble.procesagro.helpers.DB;
@@ -151,11 +152,14 @@ public class Call_Form2Activity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            //TextView tex = (TextView) findViewById(R.id.tituloUbicacion);
+            TextView tex = (TextView) findViewById(R.id.tituloUbicacion);
 
-            //tex.setText("has seleccionado "+ departamento.getSelectedItem().toString());
+            tex.setText("has seleccionado "+ departamento.getSelectedItem().toString());
 
+            ArrayAdapter<Municipio> adaptadorMun =
+                    new ArrayAdapter<Municipio>(Call_Form2Activity.this, android.R.layout.simple_list_item_1,getMunicipio2("2"));
 
+            municipio.setAdapter(adaptadorMun);
 
         }
 
