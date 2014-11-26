@@ -185,7 +185,8 @@ public class MainActivity extends ActionBarActivity{
             Log.d("Version-validator", "Version igual o menor a 10");
             Random randomGenerator = new Random();
             int index = randomGenerator.nextInt(convocatorias.size());
-            callView5.setText(convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
+            //callView5.setText(convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
+            callView5.setText(convocatorias.get(index).getTitulo());
             Log.d(MainActivity.class.getName(), convocatorias.get(index).getTitulo() + "\n" + convocatorias.get(index).getDescripcionCorta());
 
             Toast toast = Toast.makeText(MainActivity.this,"Su versión de Android no soporta algunas funciones avanzadas.", Toast.LENGTH_LONG);
@@ -499,6 +500,11 @@ public class MainActivity extends ActionBarActivity{
         protected void onPostExecute(Void result) {
             Log.d("Terminando Thread Convocatoria", "3.->Terminando Thread Convocatoria");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
 }
