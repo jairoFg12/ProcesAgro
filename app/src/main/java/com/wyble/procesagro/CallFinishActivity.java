@@ -154,6 +154,7 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
             fields.add(tramite.getCedulaSolicitante());
             fields.add(tramite.getFijoSolicitante());
             fields.add(tramite.getCelularSolicitante());
+            fields.add(tramite.getVereda());
             fields.add(Integer.toString(tramite.getMenor1Bovinos()));
             fields.add(Integer.toString(tramite.getEntre12Bovinos()));
             fields.add(Integer.toString(tramite.getEntre23Bovinos()));
