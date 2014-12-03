@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords|textPersonName"
                 android:ems="10"
-                android:maxLength="30"
+                android:maxLength="50"
                 android:id="@+id/propietario"
                 android:layout_gravity="center_horizontal"
                 android:hint="Nombre Propietario" />
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:maxLength="30"
+                android:maxLength="10"
                 android:id="@+id/celular_prop"
                 android:layout_gravity="center_horizontal"
                 android:hint="Celular Propietario" />
