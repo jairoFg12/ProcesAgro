@@ -145,6 +145,7 @@ public class Call_Form1Activity extends ActionBarActivity {
             tramite.setPerdidaDIN(Integer.parseInt(d.get("jusPerdidaDin").toString()));
             tramite.setJustificacion(d.get("justificacion").toString());
             tramite.setTerminos(Boolean.parseBoolean(d.get("terminos").toString()));
+            tramite.setVereda(d.get("vereda").toString());
             tramites.add(tramite);
         }
         db.close();
