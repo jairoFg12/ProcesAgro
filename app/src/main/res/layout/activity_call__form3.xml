@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:ems="10"
-                android:maxLength="30"
+                android:maxLength="10"
                 android:hint="Télefono fijo"
                 android:inputType="number" />
 
