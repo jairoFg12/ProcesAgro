@@ -94,10 +94,10 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.wyble.procesagro.MainActivity"/>
+        className = "com.wyble.procesagro.Call_Form3Activity"/>
       <point      
-        x = "1150"      
-        y = "750"/>
+        x = "1050"      
+        y = "650"/>
     </statePointEntry>
     <statePointEntry>
       <state      
@@ -110,10 +110,10 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.wyble.procesagro.Call_Form3Activity"/>
+        className = "com.wyble.procesagro.MainActivity"/>
       <point      
-        x = "1050"      
-        y = "650"/>
+        x = "1150"      
+        y = "750"/>
     </statePointEntry>
     <statePointEntry>
       <state      
