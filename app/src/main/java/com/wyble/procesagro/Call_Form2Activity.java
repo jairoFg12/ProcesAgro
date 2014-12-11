@@ -62,6 +62,7 @@ public class Call_Form2Activity extends ActionBarActivity {
         ArrayAdapter<Municipio> adaptadorMun =
                 new ArrayAdapter<Municipio>(Call_Form2Activity.this, android.R.layout.simple_list_item_1,getMunicipio());
 
+
         municipio.setAdapter(adaptadorMun);
 
         ArrayAdapter<Departamento> adaptador =
@@ -80,30 +81,29 @@ public class Call_Form2Activity extends ActionBarActivity {
 
         MunicipioSpin = getMunicipio2(spinDepa);
 
-
+        Integer i=0;
         for (Municipio municipio1 : MunicipioSpin = getMunicipio2(spinDepa)) {
-            if(municipio1.toString() == tramite.getMunicipio().toString()){
-                Log.d("Revision","lo encontre ..."+tramite.getMunicipio().toString());
+
+            Log.d("recorr","Recorriendo el municipio..."+municipio1.getId()+" "+municipio1.getNombreMunicipio());
+            String MunEncontrado = municipio1.getNombreMunicipio();
+            String Municipio = tramite.getMunicipio();
+
+            if(MunEncontrado.equals(Municipio)){
+                municipio.setSelection(i);
+                Log.d("revision","lo encontre ..."+Municipio+" Posicion "+i);
+            }else{
+                Log.d("recor","No encontrado "+tramite.getMunicipio().toString().trim()+"-"+MunEncontrado.trim());
             }
+            i = i + 1;
         }
 
-        tramite.getMunicipio().toString();
-       
-
-        municipio.setSelection(0);
         vereda.setText(tramite.getVereda());
-        //ArrayList arrayDepa = getDepartamentos();
 
-        //municipio.setText(tramite.getMunicipio());
-        //departamento.setText(tramite.getDepartamento());
-        //municipio.setText(tramite.getMunicipio());
-        //departamento.setText(tramite.getDepartamento());
 
         form2_next = (Button) findViewById(R.id.form2_next);
         form2_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //final String municipio_v = municipio.getText().toString().trim();
-                //final String departamento_v = departamento.getText().toString().trim();
+
                 String municipio_v = municipio.getSelectedItem().toString();
                 String departamento_v = departamento.getSelectedItem().toString();
                 String vereda_v = vereda.getText().toString().trim();
@@ -202,6 +202,25 @@ public class Call_Form2Activity extends ActionBarActivity {
             String trim_dpto = sub_dpto.trim();
             id_dpto = trim_dpto;
             cargaSpinnerMunicipio(id_dpto);
+
+
+            MunicipioSpin = getMunicipio2(id_dpto);
+
+            Integer i=0;
+            for (Municipio municipio1 : MunicipioSpin = getMunicipio2(id_dpto)) {
+
+                Log.d("recorr","Recorriendo el municipio..."+municipio1.getId()+" "+municipio1.getNombreMunicipio());
+                String MunEncontrado = municipio1.getNombreMunicipio();
+                String Municipio = tramite.getMunicipio();
+
+                if(MunEncontrado.equals(Municipio)){
+                    municipio.setSelection(i);
+                    Log.d("revision","lo encontre ciclo..."+Municipio+" Posicion "+i);
+                }else{
+                    Log.d("recor","No encontrado "+tramite.getMunicipio().toString().trim()+"-"+MunEncontrado.trim());
+                }
+                i = i + 1;
+            }
         }
 
         private void cargaSpinnerMunicipio(String selectedItemPosition) {
