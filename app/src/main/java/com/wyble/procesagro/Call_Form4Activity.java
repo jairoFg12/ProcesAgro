@@ -40,10 +40,27 @@ public class Call_Form4Activity extends ActionBarActivity {
         bovino3 = (EditText) findViewById(R.id.bovino3);
         bovino4 = (EditText) findViewById(R.id.bovino4);
 
-        bovino1.setText(String.valueOf(tramite.getMenor1Bovinos()));
-        bovino2.setText(String.valueOf(tramite.getEntre12Bovinos()));
-        bovino3.setText(String.valueOf(tramite.getEntre23Bovinos()));
-        bovino4.setText(String.valueOf(tramite.getMayores3Bovinos()));
+
+        if(tramite.getMenor1Bovinos() == 0){
+
+        }else {
+            bovino1.setText(String.valueOf(tramite.getMenor1Bovinos()));
+        }
+        if(tramite.getEntre12Bovinos() == 0){
+
+        }else {
+            bovino2.setText(String.valueOf(tramite.getEntre12Bovinos()));
+        }
+        if(tramite.getEntre23Bovinos() == 0){
+
+        }else {
+            bovino3.setText(String.valueOf(tramite.getEntre23Bovinos()));
+        }
+        if(tramite.getMayores3Bovinos() == 0){
+
+        }else {
+            bovino4.setText(String.valueOf(tramite.getMayores3Bovinos()));
+        }
 
         form4_next = (Button) findViewById(R.id.form4_next);
         form4_next.setOnClickListener(new View.OnClickListener() {

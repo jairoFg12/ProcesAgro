@@ -37,10 +37,26 @@ public class Call_Form6Activity extends ActionBarActivity {
         compra_animales = (EditText) findViewById(R.id.compra_animales);
         perdida_din = (EditText) findViewById(R.id.perdida_din);
 
-        primera_vez.setText(String.valueOf(tramite.getPrimeraVez()));
-        nacimiento.setText(String.valueOf(tramite.getNacimiento()));
-        compra_animales.setText(String.valueOf(tramite.getCompra()));
-        perdida_din.setText(String.valueOf(tramite.getPerdidaDIN()));
+        if(tramite.getPrimeraVez() == 0){
+
+        }else {
+            primera_vez.setText(String.valueOf(tramite.getPrimeraVez()));
+        }
+        if(tramite.getNacimiento() == 0){
+
+        }else {
+            nacimiento.setText(String.valueOf(tramite.getNacimiento()));
+        }
+        if(tramite.getCompra() == 0){
+
+        }else {
+            compra_animales.setText(String.valueOf(tramite.getCompra()));
+        }
+        if(tramite.getPerdidaDIN() == 0){
+
+        }else {
+            perdida_din.setText(String.valueOf(tramite.getPerdidaDIN()));
+        }
 
         form6_next = (Button) findViewById(R.id.form6_next);
         form6_next.setOnClickListener(new View.OnClickListener() {

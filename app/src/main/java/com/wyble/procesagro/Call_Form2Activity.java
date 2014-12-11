@@ -35,8 +35,10 @@ public class Call_Form2Activity extends ActionBarActivity {
     private String iddepartamento = null;
     private DB db;
     String id_dpto;
+    String spinDepa;
 
     private ArrayList<HashMap> tables;
+    private ArrayList MunicipioSpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class Call_Form2Activity extends ActionBarActivity {
         municipio = (Spinner) findViewById(R.id.municipio);
         vereda = (EditText) findViewById(R.id.vereda);
 
-        vereda.setText(tramite.getVereda());
+
 
         ArrayAdapter<Municipio> adaptadorMun =
                 new ArrayAdapter<Municipio>(Call_Form2Activity.this, android.R.layout.simple_list_item_1,getMunicipio());
@@ -69,7 +71,17 @@ public class Call_Form2Activity extends ActionBarActivity {
         departamento.setOnItemSelectedListener(new SpinnerLis());
 
 
+        String idDepartamento = tramite.getDepartamento();
+        String sub_Posicdpto = idDepartamento.substring(0,1);
+        Log.d("sub_dtpo",sub_Posicdpto);
+        String trim_Posdpto = sub_Posicdpto.trim();
+        spinDepa = trim_Posdpto;
+        departamento.setSelection(Integer.parseInt(spinDepa)-1);
 
+        MunicipioSpin = getMunicipio2(spinDepa);
+
+
+        vereda.setText(tramite.getVereda());
         //ArrayList arrayDepa = getDepartamentos();
 
         //municipio.setText(tramite.getMunicipio());
@@ -192,7 +204,12 @@ public class Call_Form2Activity extends ActionBarActivity {
         public void onNothingSelected(AdapterView<?> adapterView) {
 
         }
+
+
+
     }
+
+
 
     @Override
     protected void onPause() {
