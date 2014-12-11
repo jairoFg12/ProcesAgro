@@ -205,4 +205,21 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Serializable dataFromPaso6 = getIntent().getSerializableExtra("TRAMITE_PASO6");
+
+        final Tramite tramite = (Tramite) dataFromPaso6;
+        Intent v = new Intent(this, Call_Form6Activity.class);
+        v.putExtra("TRAMITE_PASO5", tramite);
+        startActivity(v);
+    }
+
 }

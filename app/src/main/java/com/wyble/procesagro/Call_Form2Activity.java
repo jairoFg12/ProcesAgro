@@ -44,6 +44,7 @@ public class Call_Form2Activity extends ActionBarActivity {
         setContentView(R.layout.activity_call__form2);
 
         Serializable dataFromPaso1 = getIntent().getSerializableExtra("TRAMITE_PASO1");
+
         final Tramite tramite = (Tramite) dataFromPaso1;
 
         tables = new ArrayList<HashMap>();
@@ -53,6 +54,8 @@ public class Call_Form2Activity extends ActionBarActivity {
         departamento = (Spinner) findViewById(R.id.departamento);
         municipio = (Spinner) findViewById(R.id.municipio);
         vereda = (EditText) findViewById(R.id.vereda);
+
+        vereda.setText(tramite.getVereda());
 
         ArrayAdapter<Municipio> adaptadorMun =
                 new ArrayAdapter<Municipio>(Call_Form2Activity.this, android.R.layout.simple_list_item_1,getMunicipio());
@@ -192,13 +195,22 @@ public class Call_Form2Activity extends ActionBarActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        Intent v = new Intent(this, MainActivity.class);
-        startActivity(v);
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Serializable dataFromPaso1 = getIntent().getSerializableExtra("TRAMITE_PASO1");
+
+        final Tramite tramite = (Tramite) dataFromPaso1;
+        Intent intentToForm = new Intent(this, Call_Form1Activity.class);
+        intentToForm.putExtra("TRAMITE", tramite);
+        startActivity(intentToForm);
+
+    }
 }
 
 
