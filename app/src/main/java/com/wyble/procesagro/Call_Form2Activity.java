@@ -38,7 +38,7 @@ public class Call_Form2Activity extends ActionBarActivity {
     String spinDepa;
 
     private ArrayList<HashMap> tables;
-    private ArrayList MunicipioSpin;
+    private ArrayList<Municipio> MunicipioSpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,16 @@ public class Call_Form2Activity extends ActionBarActivity {
         MunicipioSpin = getMunicipio2(spinDepa);
 
 
+        for (Municipio municipio1 : MunicipioSpin = getMunicipio2(spinDepa)) {
+            if(municipio1.toString() == tramite.getMunicipio().toString()){
+                Log.d("Revision","lo encontre ..."+tramite.getMunicipio().toString());
+            }
+        }
+
+        tramite.getMunicipio().toString();
+       
+
+        municipio.setSelection(0);
         vereda.setText(tramite.getVereda());
         //ArrayList arrayDepa = getDepartamentos();
 
@@ -156,7 +166,6 @@ public class Call_Form2Activity extends ActionBarActivity {
         return municipios;
     }
 
-
     private ArrayList<Municipio> getMunicipio2(String iddepartamento) {
         ArrayList municipios = new ArrayList();
         ArrayList<HashMap> data = db.getDataByName("municipios","departamento", iddepartamento);
@@ -177,9 +186,13 @@ public class Call_Form2Activity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            Serializable dataFromPaso1 = getIntent().getSerializableExtra("TRAMITE_PASO1");
+
+            final Tramite tramite = (Tramite) dataFromPaso1;
+
             TextView tex = (TextView) findViewById(R.id.tituloUbicacion);
 
-            tex.setText("has seleccionado "+ departamento.getSelectedItem().toString());
+            tex.setText("DEPARTAMENTO :" + tramite.getDepartamento().toString() +"\n"+"MUNICIPIO: "+tramite.getMunicipio().toString()+"\n"+"VEREDA: " + tramite.getVereda().toString().toUpperCase());
             //cargaSpinnerMunicipio(parent.);
             Log.d("mensaje", "spinner data"+departamento.getSelectedItem().toString());
             String dpto = departamento.getSelectedItem().toString();
