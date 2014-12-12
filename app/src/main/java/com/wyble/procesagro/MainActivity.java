@@ -359,7 +359,7 @@ public class MainActivity extends ActionBarActivity{
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Atención");
             alertDialogBuilder
-                    .setMessage("Debe tener una conexión a de datos ó internet.")
+                    .setMessage("Debe tener una conexión a datos ó internet.")
                     .setCancelable(false)
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
