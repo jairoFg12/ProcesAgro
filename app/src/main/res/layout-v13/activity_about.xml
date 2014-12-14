@@ -24,12 +24,12 @@
             android:id="@+id/imageView2"
             android:contentDescription="@string/about"
             android:layout_gravity="top"
-            android:src="@drawable/aboutf_h" />
+            android:src="@drawable/aboutf_m" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Holo.Small"
             android:text="© Copyright 2014. Todos los derechos reservados.\nEsta aplicación requiere internet y puede consumir recursos de su plan de datos."
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/aboutf_foot_h" />
+            android:src="@drawable/aboutf_foot_m" />
 
     </LinearLayout>
 
