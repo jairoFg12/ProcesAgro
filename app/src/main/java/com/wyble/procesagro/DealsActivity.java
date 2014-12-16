@@ -126,16 +126,6 @@ public class DealsActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        onBackPressed();
-        Intent v = new Intent(this, MainActivity.class);
-        v.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(v);
-    }
-
-
-    @Override
     protected void onPause() {
         super.onPause();
         if (mPlayer != null) {
