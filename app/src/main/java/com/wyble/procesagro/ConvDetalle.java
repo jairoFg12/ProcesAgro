@@ -43,7 +43,7 @@ public class ConvDetalle extends ActionBarActivity {
         facebookBtn = (Button) findViewById(R.id.facebookBtn);
         twitterBtn = (Button) findViewById(R.id.twitterBtn);
 
-        tituloConv.setText(convocatoria.getTitulo());
+        tituloConv.setText(convocatoria.getTitulo().toUpperCase());
         descConv.setText(convocatoria.getDescripcionLarga());
         descConv.setMovementMethod(new ScrollingMovementMethod());
 

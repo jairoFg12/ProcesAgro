@@ -47,7 +47,7 @@ public class CursoDetalle extends ActionBarActivity {
         facebookBtn = (Button) findViewById(R.id.facebookBtnCurso);
         twitterBtn = (Button) findViewById(R.id.twitterBtnCurso);
 
-        tituloCurso.setText(cursoVirtual.getNombreCurso());
+        tituloCurso.setText(cursoVirtual.getNombreCurso().toUpperCase());
         descCurso.setText(cursoVirtual.getDescripcionCurso());
         final String url = cursoVirtual.getUrlAudio();
         linkUrlCurso.setOnClickListener(new View.OnClickListener() {
