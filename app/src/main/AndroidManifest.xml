@@ -121,6 +121,9 @@
             android:name=".MainSearch"
             android:label="@string/title_activity_main_search"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.MainActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
