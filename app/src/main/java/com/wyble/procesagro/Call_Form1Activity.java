@@ -159,13 +159,16 @@ public class Call_Form1Activity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+        this.finish();
+
     }
 
-    @Override
+
+
+    /**@Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
+    }**/
 }

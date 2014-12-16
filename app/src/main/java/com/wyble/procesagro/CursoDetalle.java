@@ -2,10 +2,12 @@ package com.wyble.procesagro;
 
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.wyble.procesagro.models.CursoVirtual;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,11 +28,16 @@ public class CursoDetalle extends ActionBarActivity {
     private Button facebookBtn;
     private Button twitterBtn;
 
+    static MediaPlayer mPlayer;
+    Button btnPlay;
+    Button buttonStop;
+    Boolean repro = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_detalle);
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Serializable dataFromCallActivity = getIntent().getSerializableExtra("CURSO_VIRTUAL_ITEM");
         final CursoVirtual cursoVirtual = (CursoVirtual) dataFromCallActivity;
 
@@ -41,7 +49,7 @@ public class CursoDetalle extends ActionBarActivity {
 
         tituloCurso.setText(cursoVirtual.getNombreCurso());
         descCurso.setText(cursoVirtual.getDescripcionCurso());
-
+        final String url = cursoVirtual.getUrlAudio();
         linkUrlCurso.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(CursoDetalle.this, WebViewActivity.class);
@@ -107,5 +115,80 @@ public class CursoDetalle extends ActionBarActivity {
             }
         });
 
+        btnPlay = (Button) findViewById(R.id.PlayCurso);
+
+        repro = false;
+
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                if(!repro){
+                    mPlayer = new MediaPlayer();
+                    repro = true;
+                    mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    try {
+                        mPlayer.setDataSource(url);
+                    } catch (IllegalArgumentException e) {
+                        Toast.makeText(getApplicationContext(), "No hay audio!", Toast.LENGTH_LONG).show();
+                    } catch (SecurityException e) {
+                        Toast.makeText(getApplicationContext(), "No hay audio!", Toast.LENGTH_LONG).show();
+                    } catch (IllegalStateException e) {
+                        Toast.makeText(getApplicationContext(), "No hay audio!", Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        mPlayer.prepare();
+                    } catch (IllegalStateException e) {
+                        Toast.makeText(getApplicationContext(), "No hay audio!", Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        Toast.makeText(getApplicationContext(), "No hay audio!", Toast.LENGTH_LONG).show();
+                    }
+                    mPlayer.start();
+                    Toast.makeText(getApplicationContext(), "Cargando audio...", Toast.LENGTH_LONG).show();
+                    btnPlay.setBackgroundDrawable(getResources().getDrawable(R.drawable.pause));
+                }else{
+                    repro = false;
+
+                    if(mPlayer!=null && mPlayer.isPlaying()){
+                        mPlayer.pause();
+                        btnPlay.setBackgroundDrawable(getResources().getDrawable(R.drawable.play_icon));
+                    }
+                }
+            }});
+
+
+
     }
+    protected void onDestroy() {
+        super.onDestroy();
+        // TODO Auto-generated method stub
+        if (mPlayer != null) {
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mPlayer != null) {
+            mPlayer.release();
+            mPlayer = null;
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: // ID del boton
+                finish(); // con finish terminamos el activity actual, con lo que volvemos
+                // al activity anterior (si el anterior no ha sido cerrado)
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

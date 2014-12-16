@@ -48,11 +48,15 @@
             android:name=".ConvDetalle"
             android:label="@string/title_activity_conv_detalle"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.CallActivity" />
         </activity>
         <activity
             android:name=".Call_Form1Activity"
             android:label="@string/title_activity_call__form1"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".Call_Form2Activity"
@@ -88,6 +92,9 @@
             android:name=".StepsDetailsActivity"
             android:label="@string/title_activity_steps_details"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.DealsActivity" />
         </activity>
         <activity
             android:name=".MainSearch"
@@ -112,6 +119,9 @@
         <activity
             android:name=".CursoDetalle"
             android:label="@string/title_activity_curso_detalle" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.CursosVirtuales" />
         </activity>
         <activity
             android:name=".IntroActivity"

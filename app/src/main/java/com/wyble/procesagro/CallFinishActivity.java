@@ -28,8 +28,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static android.net.Uri.encode;
 
 
 public class CallFinishActivity extends ActionBarActivity implements View.OnClickListener{
@@ -144,7 +148,7 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
             db.updateData(TRAMITE_TABLE, tramite.toJSONArray(), tramite.getId());
 
             ArrayList<String> fields = new ArrayList();
-            fields.add(tramite.getIca());
+            fields.add(encode(tramite.getIca(), "UTF-8"));
             fields.add(tramite.getNombreFinca());
             fields.add(tramite.getNombrePropietario());
             fields.add(tramite.getCedulaPropietario());
@@ -171,9 +175,23 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
             fields.add(tramite.getJustificacion());
             fields.add(tramite.getVereda());
 
-            String complete_string = TRAMITE_URL + join(fields, "/");
+            String query = null;
+            try {
+                query = URLEncoder.encode(fields.toString(), "utf-8");
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            String complete_string = TRAMITE_URL+join(fields,"/");
+            //String url_completa = complete_string.replaceAll("%2F","/");
             Log.d("//url long", "//url long : "+ complete_string );
+           // Log.d("//url long", "//url completa : "+ url_completa );
+
+
+
             final HttpClient client = new DefaultHttpClient();
+
             final HttpPost httpGet = new HttpPost(complete_string);
 
             runOnUiThread(new Runnable() {
