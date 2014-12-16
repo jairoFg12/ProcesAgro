@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -52,7 +53,7 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_finish);
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Serializable dataFromPaso6 = getIntent().getSerializableExtra("TRAMITE_PASO6");
         tramite = (Tramite) dataFromPaso6;
 
@@ -239,6 +240,24 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
         Intent v = new Intent(this, Call_Form6Activity.class);
         v.putExtra("TRAMITE_PASO5", tramite);
         startActivity(v);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: // ID del boton
+                Serializable dataFromPaso6 = getIntent().getSerializableExtra("TRAMITE_PASO6");
+                //tramite.paso7(justificacionString);
+                justificacion.setText(tramite.getJustificacion());
+                final Tramite tramite = (Tramite) dataFromPaso6;
+                Intent v = new Intent(this, Call_Form6Activity.class);
+                v.putExtra("TRAMITE_PASO5", tramite);
+                startActivity(v);
+                finish(); // con finish terminamos el activity actual, con lo que volvemos
+                // al activity anterior (si el anterior no ha sido cerrado)
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

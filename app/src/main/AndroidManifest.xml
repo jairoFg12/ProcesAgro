@@ -81,21 +81,33 @@
             android:name=".Call_Form4Activity"
             android:label="@string/title_activity_call__form4"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.Call_Form3Activity" />
         </activity>
         <activity
             android:name=".Call_Form5Activity"
             android:label="@string/title_activity_call__form5"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.Call_Form4Activity" />
         </activity>
         <activity
             android:name=".Call_Form6Activity"
             android:label="@string/title_activity_call__form6"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.Call_Form5Activity" />
         </activity>
         <activity
             android:name=".CallFinishActivity"
             android:label="@string/title_activity_call_finish"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wyble.procesagro.Call_Form6Activity" />
         </activity>
         <activity
             android:name=".StepsDetailsActivity"
