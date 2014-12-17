@@ -1,6 +1,7 @@
 package com.wyble.procesagro;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -28,12 +29,13 @@ import static com.wyble.procesagro.R.drawable;
 
 public class DealsActivity extends ActionBarActivity {
 
+    private static final String DIALOG_MENU = "Cargando";
     private Oferta oferta;
     private TextView tituloOferta;
     private TextView descripcionOferta;
     private ListView pasosOfertaListView;
     private Button linkBtn;
-
+    ProgressDialog mProgressDialog;
 
     static MediaPlayer mPlayer;
     Button btnPlay;
@@ -128,6 +130,8 @@ public class DealsActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     @Override
@@ -148,7 +152,7 @@ public class DealsActivity extends ActionBarActivity {
             mPlayer = null;
         }
     }
-    @Override
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: // ID del boton
@@ -159,4 +163,13 @@ public class DealsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+   /* @Override
+    public void onBackPressed() {
+    super.onBackPressed();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }*/
 }
