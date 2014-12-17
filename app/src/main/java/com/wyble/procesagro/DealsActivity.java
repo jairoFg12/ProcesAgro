@@ -86,9 +86,10 @@ public class DealsActivity extends ActionBarActivity {
                                     } catch (IOException e) {
                                         Toast.makeText(getApplicationContext(), "No hay audio!", Toast.LENGTH_LONG).show();
                                     }
-                            mPlayer.start();
                             Toast.makeText(getApplicationContext(), "Cargando audio...", Toast.LENGTH_LONG).show();
-                            btnPlay.setBackgroundDrawable(getResources().getDrawable(drawable.pause));
+                            mPlayer.start();
+
+                           // btnPlay.setBackgroundDrawable(getResources().getDrawable(drawable.pause));
                 }else{
                     repro = false;
 
@@ -114,7 +115,11 @@ public class DealsActivity extends ActionBarActivity {
                 intent.putExtra("PASO_OFERTA", pasoOferta);
                 startActivity(intent);
             }
+
+
         });
+
+
 
         linkBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -132,8 +137,9 @@ public class DealsActivity extends ActionBarActivity {
             mPlayer.release();
             mPlayer = null;
         }
-
+        //this.finish();
     }
+
     protected void onDestroy() {
         super.onDestroy();
         // TODO Auto-generated method stub
@@ -146,6 +152,7 @@ public class DealsActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: // ID del boton
+
                 finish(); // con finish terminamos el activity actual, con lo que volvemos
                 // al activity anterior (si el anterior no ha sido cerrado)
                 return true;

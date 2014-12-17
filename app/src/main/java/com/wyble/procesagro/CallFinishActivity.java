@@ -32,8 +32,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static android.net.Uri.encode;
-
 
 public class CallFinishActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -149,7 +147,7 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
             db.updateData(TRAMITE_TABLE, tramite.toJSONArray(), tramite.getId());
 
             ArrayList<String> fields = new ArrayList();
-            fields.add(encode(tramite.getIca(), "UTF-8"));
+            fields.add(tramite.getIca());
             fields.add(tramite.getNombreFinca());
             fields.add(tramite.getNombrePropietario());
             fields.add(tramite.getCedulaPropietario());
