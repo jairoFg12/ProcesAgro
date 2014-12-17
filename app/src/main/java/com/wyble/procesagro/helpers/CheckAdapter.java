@@ -1,19 +1,17 @@
 package com.wyble.procesagro.helpers;
 
-import java.util.ArrayList;
 import android.content.Context;
-import android.util.Log;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.wyble.procesagro.R;
 import com.wyble.procesagro.models.PasoOferta;
 
-import org.json.JSONArray;
+import java.util.ArrayList;
 
 /**
  * Created by david on 10/3/14.
@@ -73,7 +71,7 @@ public class CheckAdapter extends ArrayAdapter<PasoOferta> {
         holder.checkBox.setText(pasoOferta.getTitulo());
         holder.checkBox.setChecked(pasoOferta.getIsChecked());
         holder.checkBox.setTag(pasoOferta);
-
+        holder.checkBox.setMovementMethod(new ScrollingMovementMethod());
         return convertView;
 
     }

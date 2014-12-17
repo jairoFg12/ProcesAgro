@@ -29,8 +29,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,6 +43,8 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
     private Tramite tramite;
     private Context context= this;
     ProgressDialog mProgressDialog;
+    private String conAcentos = "áéíóúñ";
+    private String sinAcentos = "aeioun";
 
     String TRAMITE_URL = "http://154.70.153.108/proyectos/procesAgroWeb/web/app.php/crearFormulario/";
     private static final String TRAMITE_TABLE = "tramites";
@@ -176,18 +176,12 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
             fields.add(tramite.getJustificacion());
             fields.add(tramite.getVereda());
 
-            String query = null;
-            try {
-                query = URLEncoder.encode(fields.toString(), "utf-8");
 
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            String cadena = join(fields,"/");
+            String finalCadena = removerAcentos(cadena);
+            String complete_string = TRAMITE_URL+finalCadena;
 
-            String complete_string = TRAMITE_URL+join(fields,"/");
-            //String url_completa = complete_string.replaceAll("%2F","/");
             Log.d("//url long", "//url long : "+ complete_string );
-           // Log.d("//url long", "//url completa : "+ url_completa );
 
 
 
@@ -222,6 +216,19 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
         protected void onPostExecute(Void result) {
             mProgressDialog.hide();
         }
+    }
+
+
+    private String removerAcentos(String input) {
+        String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+        // Cadena de caracteres ASCII que reemplazarán los originales.
+        String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+        String output = input;
+        for (int i=0; i<original.length(); i++) {
+            // Reemplazamos los caracteres especiales.
+            output = output.replace(original.charAt(i), ascii.charAt(i));
+        }//for i
+        return output;
     }
 
     @Override
