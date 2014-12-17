@@ -3,3 +3,8 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
+gradle/wrapper/gradle-wrapper.properties
+
+build.gradle
+
+ProcesAgro.iml
