@@ -3,7 +3,3 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
-/gradle
-/gradle/*
-build.gradle
