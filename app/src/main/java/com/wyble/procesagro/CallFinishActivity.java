@@ -29,6 +29,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -176,9 +178,14 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
 
 
             String cadena = join(fields,"/");
-            String finalCadena = removerAcentos(cadena);
+            String finalCadena = null;
+            try {
+                finalCadena = removerAcentos(cadena);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             String complete_string = TRAMITE_URL+finalCadena;
-
+            complete_string = complete_string.replace("%2F","/");
             Log.d("//url long", "//url long : "+ complete_string );
 
 
@@ -217,16 +224,20 @@ public class CallFinishActivity extends ActionBarActivity implements View.OnClic
     }
 
 
-    private String removerAcentos(String input) {
-        String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+    private String removerAcentos(String input) throws UnsupportedEncodingException {
+        //String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
         // Cadena de caracteres ASCII que reemplazarán los originales.
-        String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
-        String output = input;
+        //String ascii = "aaaeeeiiiooouuuñAAAEEEIIIOOOUUUÑcC";
+
+        input = URLEncoder.encode(input, "ISO-8859-1");
+        /*String output = input;
         for (int i=0; i<original.length(); i++) {
             // Reemplazamos los caracteres especiales.
             output = output.replace(original.charAt(i), ascii.charAt(i));
         }//for i
-        return output;
+        output = URLEncoder.encode(output, "ISO-8859-1");*/
+
+        return input;
     }
 
     @Override
